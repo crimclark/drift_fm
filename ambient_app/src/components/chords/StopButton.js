@@ -5,7 +5,7 @@ class StartButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.onClick}>Start</button>
+        <button onClick={this.props.clickHandler}>Stop</button>
       </div>
       )
   }
