@@ -14,6 +14,8 @@ class App extends Component {
       currentPage: null
     }
     this.setPage = this.setPage.bind(this);
+    this.startClickHandler = this.startClickHandler.bind(this);
+    this.stopClickHandler = this.stopClickHandler.bind(this);
   }
 
   setPage(page) {
@@ -26,14 +28,22 @@ class App extends Component {
     Tone.Transport.start();
   }
 
+  startClickHandler(pattern) {
+    pattern.start();
+  }
+
+  stopClickHandler(pattern) {
+    pattern.stop();
+  }
+
   render() {
     let partial;
     if (this.state.currentPage === "SAMPLE") {
-      partial = <Sample />
+      partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler} />
     } else if (this.state.currentPage === "MELODY") {
-      partial = <Melody />
+      partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler} />
     } else {
-      partial = <Chords />
+      partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler} />
     }
 
     return (
