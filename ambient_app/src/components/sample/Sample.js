@@ -15,6 +15,10 @@ class Sample extends Component {
     return (
       <div className="instrument">
         <h1>SAMPLE</h1>
+        <div>
+          <input type="text" placeholder="Search Freesound.org" />
+          <button>Search</button>
+        </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.samplePattern} />
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.samplePattern} />
       </div>

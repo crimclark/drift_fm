@@ -1,5 +1,6 @@
 import Tone from 'tone';
 import chordList from './chordList';
+import delay from '../fx/delay';
 
 function randomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -11,7 +12,7 @@ function randomChord(randomIndex) {
   return chordList[i];
 }
 
-var synth = new Tone.PolySynth(8, Tone.FMSynth).toMaster();
+var synth = new Tone.PolySynth(8, Tone.FMSynth).chain(delay)
 
 var chord = new Tone.Event(function(rate){
   synth.triggerAttackRelease(randomChord(randomIndex), "4n");
