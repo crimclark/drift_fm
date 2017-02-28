@@ -26,7 +26,7 @@ class Chords extends Component {
   render() {
 
     return (
-      <div className="chords">
+      <div className="instrument">
         <h1>CHORDS</h1>
         <StartButton clickHandler={this.startClickHandler} />
         <StopButton clickHandler={this.stopClickHandler} />
