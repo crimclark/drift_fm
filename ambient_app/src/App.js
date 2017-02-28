@@ -4,6 +4,7 @@ import './App.css';
 import Chords from './components/chords/Chords';
 import Melody from './components/melody/Melody';
 import Sample from './components/sample/Sample';
+import Results from './components/sample/Results';
 import Nav from './components/nav/Nav';
 
 class App extends Component {
@@ -12,10 +13,12 @@ class App extends Component {
     super();
     this.state = {
       currentPage: null,
+      searchResults: null,
       melodyDetune: 0,
       chordsDetune: 0
     }
     this.setPage = this.setPage.bind(this);
+    this.setResults = this.setResults.bind(this);
     this.startClickHandler = this.startClickHandler.bind(this);
     this.stopClickHandler = this.stopClickHandler.bind(this);
     this.octaveHandler = this.octaveHandler.bind(this);
@@ -24,6 +27,13 @@ class App extends Component {
   setPage(page) {
     this.setState({
       currentPage: page
+    })
+  }
+
+  setResults(results) {
+    this.setState({
+      searchResults: results,
+      currentPage: 'RESULTS'
     })
   }
 
@@ -54,18 +64,21 @@ class App extends Component {
 
   render() {
     let partial;
-    if (this.state.currentPage === "SAMPLE") {
-      partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler} />
-    } else if (this.state.currentPage === "MELODY") {
+    if (this.state.currentPage === 'SAMPLE') {
+      partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+                setResults={this.setResults} />
+    } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} />
+    } else if (this.state.currentPage === 'RESULTS') {
+      partial = <Results results={this.state.searchResults} />
     } else {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} detune={this.state.chordsDetune} />
     }
 
     return (
-      <div className="App">
+      <div className='App'>
         <Nav handleClick={this.setPage}/>
         {partial}
       </div>

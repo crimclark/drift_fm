@@ -32,7 +32,7 @@ class Sample extends Component {
     const token = 'YtAc01pBCxzzNZznWsSHQ2pvJ73M7dBH8kyQNyzs';
     const url = `http://www.freesound.org/apiv2/search/text/?query=${query}&fields=name,previews&token=${token}`;
     fetch(url).then( res => res.json() ).then( res => {
-      console.log(res.results)
+      this.props.setResults(res.results);
     })
   }
 
@@ -42,8 +42,8 @@ class Sample extends Component {
         <h1>SAMPLE</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.handleChange} placeholder="Search Freesound.org" />
-          <button className="pure-button">Search</button>
+            <input type="text" onChange={this.handleChange} placeholder="Search Freesound.org" />
+            <button className="pure-button">Search</button>
           </form>
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.samplePattern} />
