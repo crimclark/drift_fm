@@ -4,6 +4,7 @@ import StopButton from '../buttons/StopButton';
 import { chordPattern, chordSynth } from './chordInstrument';
 import OctaveUp from '../buttons/OctaveUp';
 import OctaveDown from '../buttons/OctaveDown';
+import WaveButton from '../buttons/WaveButton';
 
 class Chords extends Component {
 
@@ -25,6 +26,12 @@ class Chords extends Component {
         Octave:
           <OctaveUp octaveHandler={this.props.octaveHandler} inst={chordSynth} synth={'chords'} />
           <OctaveDown octaveHandler={this.props.octaveHandler} inst={chordSynth} synth={'chords'} />
+        </div>
+        <div>
+        Waveform:
+          <WaveButton wave={'sine'} instrument={chordSynth} changeWave={this.props.changeWave} />
+          <WaveButton wave={'square'} instrument={chordSynth} changeWave={this.props.changeWave} />
+          <WaveButton wave={'sawtooth'} instrument={chordSynth} changeWave={this.props.changeWave} />
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.chordPattern} />
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.chordPattern} />

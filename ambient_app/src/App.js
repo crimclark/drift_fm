@@ -25,6 +25,7 @@ class App extends Component {
     this.stopClickHandler = this.stopClickHandler.bind(this);
     this.octaveHandler = this.octaveHandler.bind(this);
     this.setUrl = this.setUrl.bind(this);
+    this.changeWave = this.changeWave.bind(this);
   }
 
   setPage(page) {
@@ -47,6 +48,10 @@ class App extends Component {
     const buffer = new Tone.Buffer(url, () => {
       SampleInstrument.set({'buffer': buffer})
     });
+  }
+
+  changeWave(wave, instrument) {
+    instrument.set({ oscillator: {type: wave} });
   }
 
   componentDidMount() {
@@ -81,12 +86,12 @@ class App extends Component {
                 setResults={this.setResults} url={this.state.sampleUrl} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} />
+                octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} changeWave={this.changeWave} />
     } else if (this.state.currentPage === 'RESULTS') {
       partial = <Results results={this.state.searchResults} setUrl={this.setUrl} />
     } else {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={this.state.chordsDetune} />
+                octaveHandler={this.octaveHandler} detune={this.state.chordsDetune} changeWave={this.changeWave} />
     }
 
     return (
