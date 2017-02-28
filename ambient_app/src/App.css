@@ -1,4 +1,5 @@
 h1 {
+  font-family: 'VT323', monospace;
   padding: 30px;
 }
 
@@ -7,10 +8,19 @@ ul {
 }
 
 .App {
-  text-align: center;
+/*  text-align: center;*/
   color: white;
-  font-family: 'VT323', monospace;
+  font-family: 'PT Sans', sans-serif;
   font-size: 1.2em;
+}
+
+.pure-menu {
+  font-family: 'VT323', monospace;
+  text-align: center;
+}
+
+.pure-menu-link {
+  padding: 40px;
 }
 
 .instrument {
