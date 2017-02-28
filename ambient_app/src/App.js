@@ -12,13 +12,13 @@ class App extends Component {
     super();
     this.state = {
       currentPage: null,
-      detune: 0
+      melodyDetune: 0,
+      chordsDetune: 0
     }
     this.setPage = this.setPage.bind(this);
     this.startClickHandler = this.startClickHandler.bind(this);
     this.stopClickHandler = this.stopClickHandler.bind(this);
     this.octaveHandler = this.octaveHandler.bind(this);
-    // this.octaveDownHandler = this.octaveDownHandler.bind(this);
   }
 
   setPage(page) {
@@ -40,17 +40,17 @@ class App extends Component {
     pattern.stop();
   }
 
-  octaveHandler(inst, val) {
-    this.setState({
-      detune: this.state.detune + val
-    })
+  octaveHandler(inst, val, synth) {
+    if (synth === 'melody') {
+      this.setState({
+        melodyDetune: this.state.melodyDetune + val
+      })
+    } else if (synth === 'chords') {
+        this.setState({
+          chordsDetune: this.state.chordsDetune + val
+        })
+      }
   }
-
-  // octaveDownHandler(inst) {
-  //   this.setState({
-  //     detune: this.state.detune - 1200
-  //   })
-  // }
 
   render() {
     let partial;
@@ -58,9 +58,10 @@ class App extends Component {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler} />
     } else if (this.state.currentPage === "MELODY") {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={this.state.detune} />
+                octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} />
     } else {
-      partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler} />
+      partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+                octaveHandler={this.octaveHandler} detune={this.state.chordsDetune} />
     }
 
     return (

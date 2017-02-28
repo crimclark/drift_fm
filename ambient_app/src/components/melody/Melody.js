@@ -22,8 +22,8 @@ class Melody extends Component {
         <h1>MELODY</h1>
         <div>
         Octave:
-          <OctaveUp octaveHandler={this.props.octaveHandler} inst={melodySynth} />
-          <OctaveDown octaveHandler={this.props.octaveHandler} inst={melodySynth} />
+          <OctaveUp octaveHandler={this.props.octaveHandler} inst={melodySynth} synth={'melody'} />
+          <OctaveDown octaveHandler={this.props.octaveHandler} inst={melodySynth} synth={'melody'} />
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.melodyPattern} />
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.melodyPattern} />

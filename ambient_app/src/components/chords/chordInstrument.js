@@ -12,12 +12,12 @@ function randomChord(randomIndex) {
   return chordList[i];
 }
 
-var synth = new Tone.PolySynth(8, Tone.FMSynth).chain(delay)
+var chordSynth = new Tone.PolySynth(8, Tone.FMSynth).chain(delay)
 
-var chord = new Tone.Event(function(rate){
-  synth.triggerAttackRelease(randomChord(randomIndex), "4n");
+var chordPattern = new Tone.Event(function(rate){
+  chordSynth.triggerAttackRelease(randomChord(randomIndex), "4n");
 })
 
-chord.loop = true;
+chordPattern.loop = true;
 
-export default chord;
+export { chordPattern, chordSynth };
