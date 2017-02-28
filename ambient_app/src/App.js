@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // Tone.Transport.bpm.value = 40;
+    Tone.Transport.bpm.value = 60;
     Tone.Transport.start();
   }
 
