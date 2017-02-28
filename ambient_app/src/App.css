@@ -2,6 +2,10 @@ h1 {
   padding: 30px;
 }
 
+ul {
+  list-style: none;
+}
+
 .App {
   text-align: center;
   color: white;
