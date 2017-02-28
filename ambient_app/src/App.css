@@ -1,12 +1,23 @@
+h1 {
+  padding: 30px;
+}
+
 .App {
   text-align: center;
   color: white;
+  font-family: 'VT323', monospace;
+  font-size: 1.2em;
 }
 
 .instrument {
   background-color: grey;
   text-align: center;
   height: 500px;
-  width: 50%;
+  width: 400px;
   margin: 0 auto;
+  border-radius: 10px;
+}
+
+button {
+  margin: 15px;
 }
