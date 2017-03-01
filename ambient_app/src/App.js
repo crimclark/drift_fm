@@ -28,6 +28,7 @@ class App extends Component {
     this.setUrl = this.setUrl.bind(this);
     this.changeWave = this.changeWave.bind(this);
     this.setSliderVal = this.setSliderVal.bind(this);
+    this.testServer = this.testServer.bind(this);
   }
 
   setSliderVal(val) {
@@ -87,6 +88,10 @@ class App extends Component {
       }
   }
 
+  testServer() {
+    fetch('/test').then( res => console.log(res) )
+  }
+
   render() {
     let partial;
     if (this.state.currentPage === 'SAMPLE') {
@@ -106,6 +111,7 @@ class App extends Component {
       <div className='App'>
         <Nav handleClick={this.setPage}/>
         {partial}
+      <button className="pure-button" onClick={this.testServer}>Save</button>
       </div>
     );
   }
