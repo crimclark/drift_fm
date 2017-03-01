@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import StartButton from '../buttons/StartButton';
 import StopButton from '../buttons/StopButton';
-import OctaveDown from '../buttons/OctaveDown';
-import OctaveUp from '../buttons/OctaveUp';
 import sampleInstrument from './SampleInstrument';
 import './sampler.css';
 import CustomSlider from '../buttons/CustomSlider';
@@ -72,7 +70,5 @@ class Sample extends Component {
 }
 
 export default Sample;
-
-// <SearchButton text={'Search'} />
 
 

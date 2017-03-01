@@ -17,8 +17,10 @@ class App extends Component {
       searchResults: null,
       melodyDetune: 0,
       chordsDetune: 0,
-      sampleUrl: null,
-      sliderVal: 0
+      sample: {
+        detune: 0,
+        url: null
+      }
     }
     this.setPage = this.setPage.bind(this);
     this.setResults = this.setResults.bind(this);
@@ -28,12 +30,28 @@ class App extends Component {
     this.setUrl = this.setUrl.bind(this);
     this.changeWave = this.changeWave.bind(this);
     this.setSliderVal = this.setSliderVal.bind(this);
-    this.testServer = this.testServer.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+  }
+
+  componentDidMount() {
+    Tone.Transport.bpm.value = 60;
+    Tone.Transport.start();
+    fetch('/songs').then( song => song.json() ).then( song => {
+      let { sample, _id } = song;
+      console.log(_id);
+      this.setState({
+        _id: _id,
+        sample: sample[0]
+      })
+    })
   }
 
   setSliderVal(val) {
     this.setState({
-      sliderVal: val
+      sample: {
+        ...this.state.sample,
+        detune: val
+      }
     })
   }
 
@@ -52,7 +70,10 @@ class App extends Component {
 
   setUrl(url) {
     this.setState({
-      sampleUrl: url
+      sample: {
+        ...this.state.sample,
+        url: url
+      }
     })
     const buffer = new Tone.Buffer(url, () => {
       SampleInstrument.set({'buffer': buffer})
@@ -63,10 +84,6 @@ class App extends Component {
     instrument.set({ oscillator: {type: wave} });
   }
 
-  componentDidMount() {
-    Tone.Transport.bpm.value = 60;
-    Tone.Transport.start();
-  }
 
   startClickHandler(pattern) {
     pattern.start();
@@ -88,15 +105,28 @@ class App extends Component {
       }
   }
 
-  testServer() {
-    fetch('/test').then( res => console.log(res) )
+  handleSave() {
+    fetch('/save', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then( console.log('saved!') );
+
   }
 
+
   render() {
+
+    const { sample } = this.state;
+
     let partial;
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                setResults={this.setResults} url={this.state.sampleUrl} setSliderVal={this.setSliderVal} value={this.state.sliderVal}/>
+                setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal} value={sample.detune}/>
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} changeWave={this.changeWave} />
@@ -111,7 +141,7 @@ class App extends Component {
       <div className='App'>
         <Nav handleClick={this.setPage}/>
         {partial}
-      <button className="pure-button" onClick={this.testServer}>Save</button>
+        <button className="pure-button" onClick={this.handleSave}>SAVE</button>
       </div>
     );
   }
