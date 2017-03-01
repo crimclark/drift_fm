@@ -5,6 +5,7 @@ import { chordPattern, chordSynth } from './chordInstrument';
 import OctaveUp from '../buttons/OctaveUp';
 import OctaveDown from '../buttons/OctaveDown';
 import WaveButton from '../buttons/WaveButton';
+import './chords.css';
 
 class Chords extends Component {
 
@@ -20,7 +21,7 @@ class Chords extends Component {
     chordSynth.set({'detune': this.props.detune})
 
     return (
-      <div className="instrument">
+      <div className="instrument chords">
         <h1>CHORDS</h1>
         <div>
         Octave:

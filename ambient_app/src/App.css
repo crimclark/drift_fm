@@ -23,8 +23,12 @@ ul {
   padding: 40px;
 }
 
+.pure-menu-selected {
+  color: #44507F;
+}
+
 .instrument {
-  background-color: grey;
+/*  background-color: #8389A3;*/
   text-align: center;
   height: 500px;
   width: 400px;

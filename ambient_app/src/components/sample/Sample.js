@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import StartButton from '../buttons/StartButton';
 import StopButton from '../buttons/StopButton';
-import SearchButton from '../buttons/SearchButton';
+import OctaveDown from '../buttons/OctaveDown';
+import OctaveUp from '../buttons/OctaveUp';
 import sampleInstrument from './SampleInstrument';
+import './sampler.css';
+import CustomSlider from '../buttons/CustomSlider';
 
 class Sample extends Component {
   constructor() {
@@ -14,6 +17,8 @@ class Sample extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.searchFreesound = this.searchFreesound.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.sliderChange = this.sliderChange.bind(this);
   }
 
   handleChange(evt) {
@@ -28,6 +33,18 @@ class Sample extends Component {
     this.searchFreesound(query);
   }
 
+  handleClick() {
+    if (sampleInstrument.reverse) {
+      sampleInstrument.set({ reverse: false });
+    } else {
+      sampleInstrument.set({ reverse: true });
+    }
+  }
+
+  sliderChange(evt) {
+    console.log(evt.target)
+  }
+
   searchFreesound(query){
     const token = 'YtAc01pBCxzzNZznWsSHQ2pvJ73M7dBH8kyQNyzs';
     const url = `http://www.freesound.org/apiv2/search/text/?query=${query}&fields=name,previews&token=${token}`;
@@ -38,13 +55,22 @@ class Sample extends Component {
 
   render() {
     return (
-      <div className="instrument">
+      <div className="instrument sampler">
         <h1>SAMPLE</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
             <input type="text" onChange={this.handleChange} placeholder="Search Freesound.org" />
             <button className="pure-button">Search</button>
           </form>
+        </div>
+        <div>
+          <button className="pure-button" onClick={this.handleClick}>Reverse</button>
+        </div>
+        <div>
+          Pitch: <OctaveDown /> 0 <OctaveUp />
+        </div>
+        <div>
+          Speed: <CustomSlider />
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.samplePattern} />
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.samplePattern} />

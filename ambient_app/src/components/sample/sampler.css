@@ -4,8 +4,12 @@
 }
 
 .sample {
-  background-color: grey;
+  background-color: #CBB274;
   margin: 10px;
   padding: 5px;
   border-radius: 7px;
+}
+
+.sampler {
+  background-color: #CBB274;
 }
