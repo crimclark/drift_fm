@@ -17,7 +17,8 @@ class App extends Component {
       searchResults: null,
       melodyDetune: 0,
       chordsDetune: 0,
-      sampleUrl: null
+      sampleUrl: null,
+      sliderVal: 0
     }
     this.setPage = this.setPage.bind(this);
     this.setResults = this.setResults.bind(this);
@@ -26,6 +27,13 @@ class App extends Component {
     this.octaveHandler = this.octaveHandler.bind(this);
     this.setUrl = this.setUrl.bind(this);
     this.changeWave = this.changeWave.bind(this);
+    this.setSliderVal = this.setSliderVal.bind(this);
+  }
+
+  setSliderVal(val) {
+    this.setState({
+      sliderVal: val
+    })
   }
 
   setPage(page) {
@@ -83,7 +91,7 @@ class App extends Component {
     let partial;
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                setResults={this.setResults} url={this.state.sampleUrl} />
+                setResults={this.setResults} url={this.state.sampleUrl} setSliderVal={this.setSliderVal} value={this.state.sliderVal}/>
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} changeWave={this.changeWave} />

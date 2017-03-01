@@ -12,13 +12,12 @@ class Sample extends Component {
     super()
     this.state = {
       samplePattern: sampleInstrument,
-      query: ''
+      query: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.searchFreesound = this.searchFreesound.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.sliderChange = this.sliderChange.bind(this);
   }
 
   handleChange(evt) {
@@ -39,10 +38,6 @@ class Sample extends Component {
     } else {
       sampleInstrument.set({ reverse: true });
     }
-  }
-
-  sliderChange(evt) {
-    console.log(evt.target)
   }
 
   searchFreesound(query){
@@ -67,10 +62,7 @@ class Sample extends Component {
           <button className="pure-button" onClick={this.handleClick}>Reverse</button>
         </div>
         <div>
-          Pitch: <OctaveDown /> 0 <OctaveUp />
-        </div>
-        <div>
-          Speed: <CustomSlider />
+          Speed: <CustomSlider value={this.props.value} setSliderVal={this.props.setSliderVal} />
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.samplePattern} />
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.samplePattern} />

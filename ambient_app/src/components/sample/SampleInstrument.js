@@ -8,8 +8,11 @@ let sampleInstrument = new Tone.GrainPlayer(sample, function(){
   sampleInstrument.grainSize = .1;
   sampleInstrument.overlap = .8;
   sampleInstrument.drift = .5;
+  sampleInstrument.loop = true;
   // sampleInstrument.detune = -1200;
 }).toMaster();
+
+
 
 export default sampleInstrument;
 

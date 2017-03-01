@@ -1,34 +1,28 @@
 import Slider from 'rc-slider';
 import React, { Component } from 'react';
 import 'rc-slider/assets/index.css';
+import sampleInstrument from '../sample/SampleInstrument';
 
 class CustomSlider extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      value: 50
+      value: this.props.value
     }
     this.onSliderChange = this.onSliderChange.bind(this);
-    this.onAfterChange = this.onAfterChange.bind(this);
   }
 
   onSliderChange(value) {
-    console.log(value);
     this.setState({
       value: value
     })
-  }
-
-  onAfterChange(value) {
-    // console.log(value)
+    sampleInstrument.set({detune: value });
+    this.props.setSliderVal(value);
   }
 
   render() {
     return (
-      <Slider value={this.state.value}
-        onChange={this.onSliderChange} onAfterChange={this.onAfterChange}
-        marks={{50: ''}}
-      />
+      <Slider value={this.state.value} min={-2400} max={2400} onChange={this.onSliderChange} marks={{0: ''}} />
     );
   }
 
