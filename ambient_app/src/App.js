@@ -28,6 +28,7 @@ class App extends Component {
     this.stopClickHandler = this.stopClickHandler.bind(this);
     this.octaveHandler = this.octaveHandler.bind(this);
     this.setUrl = this.setUrl.bind(this);
+    this.setBuffer = this.setBuffer.bind(this);
     this.changeWave = this.changeWave.bind(this);
     this.setSliderVal = this.setSliderVal.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -68,22 +69,26 @@ class App extends Component {
     })
   }
 
+  setBuffer(url) {
+    const buffer = new Tone.Buffer(url, () => {
+      SampleInstrument.set({'buffer': buffer})
+    });
+  }
+
   setUrl(url) {
+    console.log(url)
     this.setState({
       sample: {
         ...this.state.sample,
         url: url
       }
     })
-    const buffer = new Tone.Buffer(url, () => {
-      SampleInstrument.set({'buffer': buffer})
-    });
+    this.setBuffer(url);
   }
 
   changeWave(wave, instrument) {
     instrument.set({ oscillator: {type: wave} });
   }
-
 
   startClickHandler(pattern) {
     pattern.start();
@@ -118,15 +123,13 @@ class App extends Component {
 
   }
 
-
   render() {
-
     const { sample } = this.state;
-
     let partial;
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal} value={sample.detune}/>
+                setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
+                detuneVal={sample.detune} setBuffer={this.setBuffer} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} changeWave={this.changeWave} />
