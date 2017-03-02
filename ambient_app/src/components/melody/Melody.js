@@ -34,8 +34,8 @@ class Melody extends Component {
           <OctaveUp octaveHandler={this.props.octaveHandler} inst={melodySynth} synth={'melody'} />
           <OctaveDown octaveHandler={this.props.octaveHandler} inst={melodySynth} synth={'melody'} />
         </div>
-        Waveform:
         <div>
+        Waveform:
           <WaveButton wave={'sine'} instrument={melodySynth} changeWave={this.props.changeWave} />
           <WaveButton wave={'square'} instrument={melodySynth} changeWave={this.props.changeWave} />
           <WaveButton wave={'sawtooth'} instrument={melodySynth} changeWave={this.props.changeWave} />

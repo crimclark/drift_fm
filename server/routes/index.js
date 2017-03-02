@@ -22,9 +22,28 @@ router.put('/save', (req, res) => {
       console.log(err);
     } else {
       console.log('Song state saved!');
+      res.send('saved');
     }
   })
-  res.send('saved');
+})
+
+router.post('/songs', (req, res) => {
+  const {token, email, name} = req.body;
+  Song.findOne({user: email}, (err, song) =>{
+    if (!song) {
+      const song = new Song({
+        user: email
+      });
+      song.save()
+          .then( song => {
+            console.log('created new song');
+            res.send(song);
+          });
+    } else {
+      console.log('song found!');
+      res.send(song);
+    }
+  })
 })
 
 module.exports = router;
