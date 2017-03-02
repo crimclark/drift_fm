@@ -19,8 +19,6 @@ class App extends Component {
       loggedIn: false,
       currentPage: "LOGIN",
       searchResults: null,
-      melodyDetune: 0,
-      chordsDetune: 0,
       chords: {
         detune: 0,
         oscillator: {
@@ -95,6 +93,7 @@ class App extends Component {
     const buffer = new Tone.Buffer(url, () => {
       SampleInstrument.set({'buffer': buffer})
     });
+    console.log(buffer);
   }
 
   setUrl(url) {
@@ -172,11 +171,10 @@ class App extends Component {
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
-                detuneVal={sample.detune} setBuffer={this.setBuffer} />
+                detuneVal={sample.detune} setBuffer={this.setBuffer} settings={sample} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={melody.detune} wave={melody.oscillator.type}
-                changeWave={this.changeWave} settings={melody} />
+                octaveHandler={this.octaveHandler} changeWave={this.changeWave} settings={melody} />
     } else if (this.state.currentPage === 'RESULTS') {
       partial = <Results results={this.state.searchResults} setUrl={this.setUrl} />
     } else if (this.state.currentPage === 'CHORDS') {

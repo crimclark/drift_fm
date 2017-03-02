@@ -18,13 +18,13 @@ class Sample extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props.url);
-    sampleInstrument.set({
-      detune: this.props.detuneVal,
-    });
-    this.props.setBuffer(this.props.url);
-  }
+  // componentDidMount() {
+  //   console.log(this.props.url);
+  //   sampleInstrument.set({
+  //     detune: this.props.detuneVal,
+  //   });
+  //   this.props.setBuffer(this.props.url);
+  // }
 
   handleChange(evt) {
     this.setState({
@@ -55,6 +55,13 @@ class Sample extends Component {
   }
 
   render() {
+
+    sampleInstrument.set({
+      detune: this.props.detuneVal
+    });
+
+    this.props.setBuffer(this.props.url);
+
     return (
       <div className="instrument sampler">
         <h1>SAMPLE</h1>

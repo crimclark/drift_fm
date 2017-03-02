@@ -24,7 +24,6 @@ const Login = ({setLoggedIn}) => {
           })
         }).then( song => song.json() )
           .then( song => {
-            // console.log(song);
             setLoggedIn(song);
           })
     }
