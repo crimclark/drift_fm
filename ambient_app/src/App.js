@@ -16,6 +16,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
+      loggedIn: false,
       currentPage: "LOGIN",
       searchResults: null,
       melodyDetune: 0,
@@ -48,21 +49,35 @@ class App extends Component {
     this.changeWave = this.changeWave.bind(this);
     this.setSliderVal = this.setSliderVal.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.setLoggedIn = this.setLoggedIn.bind(this);
   }
 
   componentDidMount() {
     Tone.Transport.bpm.value = 60;
     Tone.Transport.start();
-    fetch('/songs').then( song => song.json() ).then( song => {
-      let { chords, melody, sample, _id } = song;
-      this.setState({
-        _id: _id,
-        sample: sample[0],
-        chords: chords[0],
-        melody: melody[0]
-      })
+    // if (this.state.loggedIn) {
+    //   fetch('/songs').then( song => song.json() ).then( song => {
+    //     let { chords, melody, sample, _id } = song;
+    //     this.setState({
+    //       _id: _id,
+    //       sample: sample[0],
+    //       chords: chords[0],
+    //       melody: melody[0]
+    //     })
+    //   })
+    // }
+  }
+
+  setLoggedIn(song) {
+    const { chords, melody, sample, _id } = song;
+    console.log(chords);
+    this.setState({
+      loggedIn: true,
+      _id: _id,
+      sample: sample[0],
+      chords: chords[0],
+      melody: melody[0]
     })
-    // console.log('client id ', client_id)
   }
 
   setSliderVal(val) {
@@ -117,8 +132,6 @@ class App extends Component {
   }
 
   octaveHandler(inst, val, synth) {
-
-    console.log('val is', val)
     if (synth === 'melody') {
       this.setState({
         melody: {
@@ -164,17 +177,21 @@ class App extends Component {
     } else if (this.state.currentPage === 'CHORDS') {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} detune={chords.detune} changeWave={this.changeWave} />
-    } else {
-      partial = <Login />
     }
 
-    return (
-      <div className='App'>
-        <Nav handleClick={this.setPage}/>
-        {partial}
-        <button className="pure-button" onClick={this.handleSave}>SAVE</button>
-      </div>
-    );
+    if (this.state.loggedIn) {
+      return (
+        <div className='App'>
+          <Nav handleClick={this.setPage}/>
+          {partial}
+          <button className="pure-button" onClick={this.handleSave}>SAVE</button>
+        </div>
+      );
+    } else {
+      return (
+        <Login setLoggedIn={this.setLoggedIn} />
+        )
+    }
   }
 }
 

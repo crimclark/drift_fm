@@ -70,7 +70,9 @@ class Sample extends Component {
         <div>
           Speed: <CustomSlider value={this.props.detuneVal} setSliderVal={this.props.setSliderVal} />
         </div>
-        <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.samplePattern} />
+        <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.samplePattern}>
+        Start
+        </StartButton>
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.samplePattern} />
       </div>
       )

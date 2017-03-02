@@ -31,7 +31,7 @@ class Melody extends Component {
         <h1>MELODY</h1>
         <div>
         Octave:
-          <OctaveUp octaveHandler={this.props.octaveHandler} inst={melodySynth} synth={'melody'} />
+          <OctaveUp octaveHandler={this.props.octaveHandler} inst={melodySynth} synth='melody' />
           <OctaveDown octaveHandler={this.props.octaveHandler} inst={melodySynth} synth={'melody'} />
         </div>
         <div>
@@ -40,7 +40,9 @@ class Melody extends Component {
           <WaveButton wave={'square'} instrument={melodySynth} changeWave={this.props.changeWave} />
           <WaveButton wave={'sawtooth'} instrument={melodySynth} changeWave={this.props.changeWave} />
         </div>
-        <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.melodyPattern} />
+        <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.melodyPattern} >
+          Start
+        </StartButton>
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.melodyPattern} />
       </div>
       )

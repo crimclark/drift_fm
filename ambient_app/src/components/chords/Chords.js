@@ -41,7 +41,9 @@ class Chords extends Component {
           <WaveButton wave={'square'} instrument={chordSynth} changeWave={this.props.changeWave} />
           <WaveButton wave={'sawtooth'} instrument={chordSynth} changeWave={this.props.changeWave} />
         </div>
-        <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.chordPattern} />
+        <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.chordPattern}>
+          Start
+        </StartButton>
         <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.chordPattern} />
       </div>
     );

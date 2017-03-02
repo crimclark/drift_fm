@@ -5,9 +5,9 @@ const ChordSchema = require('./Chords');
 
 const SongSchema = new mongoose.Schema({
   user: String,
-  sample: [SampleSchema],
-  melody: [MelodySchema],
-  chords: [ChordSchema]
+  sample: { type: [SampleSchema], default: [SampleSchema] },
+  melody: { type: [MelodySchema], default: [MelodySchema] },
+  chords: { type: [ChordSchema], default: [ChordSchema] }
 });
 
 const Song = mongoose.model('Song', SongSchema);

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const ChordSchema = new mongoose.Schema({
-  detune: Number,
+  detune: { type: Number, default: 0},
   oscillator: {
-    type: String
+    type: { $type: String, default: 'sine' }
   }
 }, {typeKey: '$type'});
 
