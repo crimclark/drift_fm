@@ -16,30 +16,32 @@ class Chords extends Component {
     }
   }
 
-  componentDidMount() {
-    chordSynth.set({
-      detune: this.props.detune,
-      // oscillator: {type: this.props.wave}
-    });
-  }
+  // componentDidMount() {
+  //   chordSynth.set({
+  //     detune: this.props.detune,
+  //     oscillator: {type: this.props.wave}
+  //   });
+  // }
 
   render() {
 
-    chordSynth.set({'detune': this.props.detune})
+    // chordSynth.set({'detune': this.props.detune});
+    // chordSynth.set({oscillator: {type: this.props.wave}});
+    chordSynth.set(this.props.settings);
 
     return (
       <div className="instrument chords">
         <h1>CHORDS</h1>
         <div>
         Octave:
-          <OctaveUp octaveHandler={this.props.octaveHandler} inst={chordSynth} synth={'chords'} />
-          <OctaveDown octaveHandler={this.props.octaveHandler} inst={chordSynth} synth={'chords'} />
+          <OctaveUp octaveHandler={this.props.octaveHandler} synth='chords' />
+          <OctaveDown octaveHandler={this.props.octaveHandler} synth='chords' />
         </div>
         <div>
         Waveform:
-          <WaveButton wave={'sine'} instrument={chordSynth} changeWave={this.props.changeWave} />
-          <WaveButton wave={'square'} instrument={chordSynth} changeWave={this.props.changeWave} />
-          <WaveButton wave={'sawtooth'} instrument={chordSynth} changeWave={this.props.changeWave} />
+          <WaveButton wave='sine' synth='chords' changeWave={this.props.changeWave} />
+          <WaveButton wave='square' synth='chords' changeWave={this.props.changeWave} />
+          <WaveButton wave='sawtooth' synth='chords' changeWave={this.props.changeWave} />
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.chordPattern}>
           Start

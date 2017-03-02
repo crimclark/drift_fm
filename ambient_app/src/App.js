@@ -55,17 +55,6 @@ class App extends Component {
   componentDidMount() {
     Tone.Transport.bpm.value = 60;
     Tone.Transport.start();
-    // if (this.state.loggedIn) {
-    //   fetch('/songs').then( song => song.json() ).then( song => {
-    //     let { chords, melody, sample, _id } = song;
-    //     this.setState({
-    //       _id: _id,
-    //       sample: sample[0],
-    //       chords: chords[0],
-    //       melody: melody[0]
-    //     })
-    //   })
-    // }
   }
 
   setLoggedIn(song) {
@@ -119,9 +108,24 @@ class App extends Component {
     this.setBuffer(url);
   }
 
-  changeWave(wave, instrument) {
-    instrument.set({ oscillator: {type: wave} });
+  changeWave(wave, synth) {
+    if (synth === 'melody') {
+      this.setState({
+        melody: {
+          ...this.state.melody,
+          oscillator: {type: wave}
+        }
+      })
+    } else if (synth === 'chords') {
+      this.setState({
+        chords: {
+          ...this.state.chords,
+          oscillator: {type: wave}
+        }
+      })
+    }
   }
+
 
   startClickHandler(pattern) {
     pattern.start();
@@ -131,7 +135,7 @@ class App extends Component {
     pattern.stop();
   }
 
-  octaveHandler(inst, val, synth) {
+  octaveHandler(val, synth) {
     if (synth === 'melody') {
       this.setState({
         melody: {
@@ -171,12 +175,13 @@ class App extends Component {
                 detuneVal={sample.detune} setBuffer={this.setBuffer} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={melody.detune} changeWave={this.changeWave} />
+                octaveHandler={this.octaveHandler} detune={melody.detune} wave={melody.oscillator.type}
+                changeWave={this.changeWave} settings={melody} />
     } else if (this.state.currentPage === 'RESULTS') {
       partial = <Results results={this.state.searchResults} setUrl={this.setUrl} />
     } else if (this.state.currentPage === 'CHORDS') {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={chords.detune} changeWave={this.changeWave} />
+                octaveHandler={this.octaveHandler} changeWave={this.changeWave} settings={chords} />
     }
 
     if (this.state.loggedIn) {
