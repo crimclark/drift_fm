@@ -16,8 +16,8 @@ router.get('/songs', (req, res) => {
 })
 
 router.put('/save', (req, res) => {
-  const { _id, sample } = req.body;
-  Song.findByIdAndUpdate(_id, {sample: sample}, (err, song) => {
+  const { _id, sample, melody, chords } = req.body;
+  Song.findByIdAndUpdate(_id, {sample: sample, melody: melody, chords: chords}, (err, song) => {
     if (err) {
       console.log(err);
     } else {

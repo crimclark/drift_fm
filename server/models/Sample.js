@@ -5,8 +5,6 @@ const SampleSchema = new mongoose.Schema({
   detune: Number
 });
 
-// const Sample = mongoose.model('Sample', SampleSchema);
-
 module.exports = SampleSchema;
 
 

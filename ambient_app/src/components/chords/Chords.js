@@ -16,6 +16,13 @@ class Chords extends Component {
     }
   }
 
+  componentDidMount() {
+    chordSynth.set({
+      detune: this.props.detune,
+      // oscillator: {type: this.props.wave}
+    });
+  }
+
   render() {
 
     chordSynth.set({'detune': this.props.detune})

@@ -15,6 +15,13 @@ class Melody extends Component {
     }
   }
 
+  componentDidMount() {
+    melodySynth.set({
+      detune: this.props.detune,
+      // oscillator: {type: this.props.wave}
+    });
+  }
+
   render() {
 
     melodySynth.set({'detune': this.props.detune})

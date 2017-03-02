@@ -17,9 +17,22 @@ class App extends Component {
       searchResults: null,
       melodyDetune: 0,
       chordsDetune: 0,
+      chords: {
+        detune: 0,
+        oscillator: {
+          type: 'sine'
+        }
+      },
+      melody: {
+        detune: 0,
+        oscillator: {
+          type: 'sine'
+        }
+      },
       sample: {
         detune: 0,
-        url: null
+        url: null,
+        reverse: false
       }
     }
     this.setPage = this.setPage.bind(this);
@@ -35,14 +48,17 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(this.state.melody.detune)
     Tone.Transport.bpm.value = 60;
     Tone.Transport.start();
     fetch('/songs').then( song => song.json() ).then( song => {
-      let { sample, _id } = song;
+      let { chords, melody, sample, _id } = song;
       console.log(_id);
       this.setState({
         _id: _id,
-        sample: sample[0]
+        sample: sample[0],
+        chords: chords[0],
+        melody: melody[0]
       })
     })
   }
@@ -99,13 +115,23 @@ class App extends Component {
   }
 
   octaveHandler(inst, val, synth) {
+
+    console.log('val is', val)
     if (synth === 'melody') {
       this.setState({
-        melodyDetune: this.state.melodyDetune + val
+        // melodyDetune: this.state.melodyDetune + val
+        melody: {
+          ...this.state.melody,
+          detune: this.state.melody.detune + val
+        }
       })
     } else if (synth === 'chords') {
         this.setState({
-          chordsDetune: this.state.chordsDetune + val
+          // chordsDetune: this.state.chordsDetune + val
+          chords: {
+            ...this.state.chords,
+            detune: this.state.chords.detune + val
+          }
         })
       }
   }
@@ -124,7 +150,7 @@ class App extends Component {
   }
 
   render() {
-    const { sample } = this.state;
+    const { sample, chords, melody } = this.state;
     let partial;
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
@@ -132,12 +158,12 @@ class App extends Component {
                 detuneVal={sample.detune} setBuffer={this.setBuffer} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={this.state.melodyDetune} changeWave={this.changeWave} />
+                octaveHandler={this.octaveHandler} detune={melody.detune} changeWave={this.changeWave} />
     } else if (this.state.currentPage === 'RESULTS') {
       partial = <Results results={this.state.searchResults} setUrl={this.setUrl} />
     } else {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} detune={this.state.chordsDetune} changeWave={this.changeWave} />
+                octaveHandler={this.octaveHandler} detune={chords.detune} changeWave={this.changeWave} />
     }
 
     return (
