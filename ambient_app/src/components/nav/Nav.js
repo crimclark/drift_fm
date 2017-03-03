@@ -10,6 +10,7 @@ class Nav extends Component {
           <NavLink link={"CHORDS"} handleClick={this.props.handleClick} />
           <NavLink link={"MELODY"} handleClick={this.props.handleClick}/>
           <NavLink link={"SAMPLE"} handleClick={this.props.handleClick} />
+          <NavLink link={"GLOBAL"} handleClick={this.props.handleClick} />
         </ul>
       </div>
       )

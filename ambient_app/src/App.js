@@ -5,11 +5,10 @@ import Chords from './components/chords/Chords';
 import Melody from './components/melody/Melody';
 import Sample from './components/sample/Sample';
 import Results from './components/sample/Results';
+import Global from './components/global/Global';
 import Nav from './components/nav/Nav';
 import SampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
-
-// const client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 class App extends Component {
 
@@ -48,6 +47,8 @@ class App extends Component {
     this.setSliderVal = this.setSliderVal.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.setLoggedIn = this.setLoggedIn.bind(this);
+    this.setReverse = this.setReverse.bind(this);
+    this.startAll = this.startAll.bind(this);
   }
 
   componentDidMount() {
@@ -96,6 +97,12 @@ class App extends Component {
     console.log(buffer);
   }
 
+  // function (...args) {
+  //   for (var i = 0; i < args.length; i++) {
+  //     console.log(args[i]);
+  //   }
+  // }
+
   setUrl(url) {
     console.log(url)
     this.setState({
@@ -105,6 +112,15 @@ class App extends Component {
       }
     })
     this.setBuffer(url);
+  }
+
+  setReverse(bool) {
+    this.setState({
+      sample: {
+        ...this.state.sample,
+        reverse: bool
+      }
+    })
   }
 
   changeWave(wave, synth) {
@@ -125,6 +141,15 @@ class App extends Component {
     }
   }
 
+  startAll(...patterns) {
+    for (var i = 0; i < patterns.length; i++) {
+      patterns[i].start();
+    }
+  }
+
+  // startAll(patterns) {
+  //     patterns.start();
+  // }
 
   startClickHandler(pattern) {
     pattern.start();
@@ -171,7 +196,7 @@ class App extends Component {
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
-                detuneVal={sample.detune} setBuffer={this.setBuffer} settings={sample} />
+                detuneVal={sample.detune} setBuffer={this.setBuffer} settings={sample} setReverse={this.setReverse} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} changeWave={this.changeWave} settings={melody} />
@@ -180,6 +205,8 @@ class App extends Component {
     } else if (this.state.currentPage === 'CHORDS') {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} changeWave={this.changeWave} settings={chords} />
+    } else if (this.state.currentPage === 'GLOBAL') {
+      partial = <Global startAll={this.startAll} />
     }
 
     if (this.state.loggedIn) {

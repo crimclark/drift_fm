@@ -39,11 +39,14 @@ class Sample extends Component {
   }
 
   handleClick() {
+    let reverse;
     if (sampleInstrument.reverse) {
-      sampleInstrument.set({ reverse: false });
+      reverse = false;
     } else {
-      sampleInstrument.set({ reverse: true });
+      reverse = true;
     }
+    sampleInstrument.set({ reverse: reverse });
+    this.props.setReverse(reverse)
   }
 
   searchFreesound(query){

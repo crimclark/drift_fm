@@ -12,7 +12,5 @@ let sampleInstrument = new Tone.GrainPlayer(sample, function(){
   // sampleInstrument.detune = -1200;
 }).toMaster();
 
-
-
 export default sampleInstrument;
 
