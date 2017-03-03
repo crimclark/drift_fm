@@ -43,7 +43,7 @@ class App extends Component {
     this.setResults = this.setResults.bind(this);
     this.startClickHandler = this.startClickHandler.bind(this);
     this.stopClickHandler = this.stopClickHandler.bind(this);
-    this.octaveHandler = this.octaveHandler.bind(this);
+    this.detuneHandler = this.detuneHandler.bind(this);
     this.setUrl = this.setUrl.bind(this);
     this.setBuffer = this.setBuffer.bind(this);
     this.changeWave = this.changeWave.bind(this);
@@ -159,19 +159,31 @@ class App extends Component {
     pattern.stop();
   }
 
-  octaveHandler(val, synth) {
+  detuneHandler(val, synth) {
+    const {melody, chords} = this.state;
     if (synth === 'melody') {
       this.setState({
         melody: {
-          ...this.state.melody,
-          detune: this.state.melody.detune + val
+          ...melody,
+          detune: melody.detune + val
         }
       })
     } else if (synth === 'chords') {
         this.setState({
           chords: {
-            ...this.state.chords,
-            detune: this.state.chords.detune + val
+            ...chords,
+            detune: chords.detune + val
+          }
+        })
+      } else if (synth === 'all') {
+        this.setState({
+          chords: {
+            ...chords,
+            detune: chords.detune + val
+          },
+          melody: {
+            ...melody,
+            detune: melody.detune + val
           }
         })
       }
@@ -209,14 +221,14 @@ class App extends Component {
                 detuneVal={sample.detune} setBuffer={this.setBuffer} setReverse={this.setReverse} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} changeWave={this.changeWave} />
+                detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
     } else if (this.state.currentPage === 'RESULTS') {
       partial = <Results results={this.state.searchResults} setUrl={this.setUrl} />
     } else if (this.state.currentPage === 'CHORDS') {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} changeWave={this.changeWave} />
+                detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
     } else if (this.state.currentPage === 'GLOBAL') {
-      partial = <Global startAll={this.startAll} stopAll={this.stopAll} />
+      partial = <Global startAll={this.startAll} stopAll={this.stopAll} detuneHandler={this.detuneHandler} />
     }
 
     if (this.state.loggedIn) {

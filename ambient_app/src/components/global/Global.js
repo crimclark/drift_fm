@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AllButton from '../buttons/AllButton';
-import TransposeButton from '../buttons/TransposeButton';
+import Transpose from '../controls/Transpose';
 import BPMSlider from '../buttons/BPMSlider';
 import './global.css';
 import { melodyPattern } from '../melody/melodyInstrument';
@@ -24,7 +24,8 @@ class Global extends Component {
       <div className="instrument global">
         <h1>GLOBAL</h1>
         <div>
-          Transpose: <TransposeButton>+</TransposeButton><TransposeButton>-</TransposeButton>
+          Transpose:
+          <Transpose detuneHandler={this.props.detuneHandler} synth='all' plus={100} minus={-100} />
         </div>
         <div>
           <BPMSlider min={5} max={105} value={55} />

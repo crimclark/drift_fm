@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import StartButton from '../buttons/StartButton';
 import StopButton from '../buttons/StopButton';
 import { chordPattern, chordSynth } from './chordInstrument';
-import OctaveUp from '../buttons/OctaveUp';
-import OctaveDown from '../buttons/OctaveDown';
+import Transpose from '../controls/Transpose';
 import WaveButton from '../buttons/WaveButton';
 import './chords.css';
 
@@ -23,8 +22,7 @@ class Chords extends Component {
         <h1>CHORDS</h1>
         <div>
         Octave:
-          <OctaveUp octaveHandler={this.props.octaveHandler} synth='chords' />
-          <OctaveDown octaveHandler={this.props.octaveHandler} synth='chords' />
+          <Transpose detuneHandler={this.props.detuneHandler} synth='chords' plus={1200} minus={-1200} />
         </div>
         <div>
         Waveform:
