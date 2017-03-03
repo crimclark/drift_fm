@@ -9,20 +9,10 @@ import sampleInstrument from '../sample/SampleInstrument';
 
 class Global extends Component {
 
-  constructor() {
-    super()
-    // this.state = {
-    //   melodyPattern: melodyPattern
-    // }
-  }
-
   render() {
-    // console.log(melodyPattern);
-    // const patterns = [melodyPattern, chordPattern, sampleInstrument];
-
     return (
       <div className="instrument global">
-        <h1>GLOBAL</h1>
+        <h1>G L O B A L</h1>
         <div>
           Transpose:
           <Transpose detuneHandler={this.props.detuneHandler} synth='all' plus={100} minus={-100} />

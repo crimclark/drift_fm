@@ -1,7 +1,6 @@
 import Slider from 'rc-slider';
 import React, { Component } from 'react';
 import 'rc-slider/assets/index.css';
-// import sampleInstrument from '../sample/SampleInstrument';
 
 class BPMSlider extends Component {
   constructor(props) {
@@ -16,13 +15,11 @@ class BPMSlider extends Component {
     this.setState({
       value: value
     })
-    // sampleInstrument.set({detune: value });
-    // this.props.setSliderVal(value);
   }
 
   render() {
     return (
-      <Slider value={this.state.value} min={this.props.min} max={this.props.max} onChange={this.onSliderChange} marks={{55: ''}} />
+      <Slider className="custom-slider" value={this.state.value} min={this.props.min} max={this.props.max} onChange={this.onSliderChange} marks={{55: ''}} />
     );
   }
 

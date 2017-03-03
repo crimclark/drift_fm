@@ -10,8 +10,8 @@ import Nav from './components/nav/Nav';
 import SampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
 
-import { melodySynth, melodyPattern } from './components/melody/melodyInstrument';
-import { chordPattern, chordSynth } from './components/chords/chordInstrument';
+import { melodySynth } from './components/melody/melodyInstrument';
+import { chordSynth } from './components/chords/chordInstrument';
 
 class App extends Component {
 
@@ -62,7 +62,6 @@ class App extends Component {
 
   setLoggedIn(song) {
     const { chords, melody, sample, _id } = song;
-    console.log(chords);
     this.setState({
       loggedIn: true,
       _id: _id,
@@ -98,11 +97,9 @@ class App extends Component {
     const buffer = new Tone.Buffer(url, () => {
       SampleInstrument.set({'buffer': buffer})
     });
-    console.log(buffer);
   }
 
   setUrl(url) {
-    console.log(url)
     this.setState({
       sample: {
         ...this.state.sample,
@@ -152,7 +149,7 @@ class App extends Component {
   }
 
   startClickHandler(pattern) {
-    pattern.start();
+    pattern.start('@8n');
   }
 
   stopClickHandler(pattern) {
@@ -160,7 +157,7 @@ class App extends Component {
   }
 
   detuneHandler(val, synth) {
-    const {melody, chords} = this.state;
+    const {melody, chords, sample} = this.state;
     if (synth === 'melody') {
       this.setState({
         melody: {
@@ -184,6 +181,10 @@ class App extends Component {
           melody: {
             ...melody,
             detune: melody.detune + val
+          },
+          sample: {
+            ...sample,
+            detune: sample.detune + val
           }
         })
       }
@@ -203,7 +204,7 @@ class App extends Component {
   }
 
   render() {
-    const { sample, chords, melody } = this.state;
+    const { sample, chords, melody, currentPage, searchResults, loggedIn } = this.state;
 
     //initialize instruments to settings from state
     //need to refactor sample model to allow `SampleInstrument.set(sample)`
@@ -215,28 +216,30 @@ class App extends Component {
     this.setBuffer(sample.url);
 
     let partial;
-    if (this.state.currentPage === 'SAMPLE') {
+    if (currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
                 detuneVal={sample.detune} setBuffer={this.setBuffer} setReverse={this.setReverse} />
-    } else if (this.state.currentPage === 'MELODY') {
+    } else if (currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
-    } else if (this.state.currentPage === 'RESULTS') {
-      partial = <Results results={this.state.searchResults} setUrl={this.setUrl} />
-    } else if (this.state.currentPage === 'CHORDS') {
+    } else if (currentPage === 'RESULTS') {
+      partial = <Results results={searchResults} setUrl={this.setUrl} />
+    } else if (currentPage === 'CHORDS') {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
-    } else if (this.state.currentPage === 'GLOBAL') {
+    } else if (currentPage === 'GLOBAL') {
       partial = <Global startAll={this.startAll} stopAll={this.stopAll} detuneHandler={this.detuneHandler} />
     }
 
-    if (this.state.loggedIn) {
+    if (loggedIn) {
       return (
         <div className='App'>
           <Nav handleClick={this.setPage}/>
           {partial}
-          <button className="pure-button" onClick={this.handleSave}>SAVE</button>
+          <div className="save-button">
+            <button className="pure-button" onClick={this.handleSave}>SAVE</button>
+          </div>
         </div>
       );
     } else {

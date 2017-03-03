@@ -53,7 +53,7 @@ class Sample extends Component {
 
     return (
       <div className="instrument sampler">
-        <h1>SAMPLE</h1>
+        <h1>S A M P L E</h1>
         <div>
           <form onSubmit={this.handleSubmit}>
             <input type="text" onChange={this.handleChange} placeholder="Search Freesound.org" />

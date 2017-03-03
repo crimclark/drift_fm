@@ -10,7 +10,6 @@ const Login = ({setLoggedIn}) => {
       throw response.error;
     } else {
         const {tokenId, profileObj: {email, givenName}} = response;
-        console.log(response);
         fetch('/songs', {
           method: 'POST',
           headers: {
@@ -30,15 +29,6 @@ const Login = ({setLoggedIn}) => {
   }
 
   const client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-
-  // const style= {
-  //   position: 'absolute',
-  //   top: 0,
-  //   bottom: 0,
-  //   left: 0,
-  //   right: 0,
-  //   margin: 'auto'
-  // }
 
   return (
     <div className="login">

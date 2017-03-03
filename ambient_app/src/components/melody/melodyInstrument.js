@@ -1,5 +1,7 @@
 import Tone from 'tone';
 import delay from '../fx/delay';
+import {randomVal, rates} from '../lib/random';
+
 
 var melodySynth = new Tone.MonoSynth({
   'oscillator' : {
@@ -19,14 +21,17 @@ var melodySynth = new Tone.MonoSynth({
   baseFrequency:1000,
   octaves:7,
   exponent:0
-  }
+  },
+  volume: -20
 }).chain(delay);
 
 
 
 let melodyPattern = new Tone.Pattern(function(time, note){
   melodySynth.triggerAttackRelease(note, 0.5);
-  // pattern.playbackRate = randomRate(randomIndex) * 4;
+  melodyPattern.playbackRate = randomVal(rates);
 }, ["C5", "D5", "E5", "F5", "G5", "A5", "B5"], "random");
 
 export { melodySynth, melodyPattern };
+
+

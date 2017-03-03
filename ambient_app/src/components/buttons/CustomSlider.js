@@ -2,6 +2,7 @@ import Slider from 'rc-slider';
 import React, { Component } from 'react';
 import 'rc-slider/assets/index.css';
 import sampleInstrument from '../sample/SampleInstrument';
+import './customSlider.css';
 
 class CustomSlider extends Component {
   constructor(props) {
@@ -22,7 +23,10 @@ class CustomSlider extends Component {
 
   render() {
     return (
-      <Slider value={this.state.value} min={-2400} max={2400} onChange={this.onSliderChange} marks={{0: ''}} />
+      <div className="custom-slider">
+        <Slider value={this.state.value} min={-2400} max={2400}
+        onChange={this.onSliderChange} marks={{0: ''}} />
+      </div>
     );
   }
 
