@@ -11,5 +11,8 @@
     "morgan": "^1.8.1",
     "path": "^0.12.7",
     "request": "^2.79.0"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
