@@ -10,7 +10,8 @@ const Login = ({setLoggedIn}) => {
       throw response.error;
     } else {
         const {tokenId, profileObj: {email, givenName}} = response;
-        fetch('https://guarded-oasis-75638.herokuapp.com/songs', {
+        const server = process.env.REACT_APP_SERVER;
+        fetch(`${server}/songs`, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
