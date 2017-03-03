@@ -101,12 +101,6 @@ class App extends Component {
     console.log(buffer);
   }
 
-  // function (...args) {
-  //   for (var i = 0; i < args.length; i++) {
-  //     console.log(args[i]);
-  //   }
-  // }
-
   setUrl(url) {
     console.log(url)
     this.setState({
@@ -199,6 +193,8 @@ class App extends Component {
   render() {
     const { sample, chords, melody } = this.state;
 
+    //initialize instruments to settings from state
+    //need to refactor sample model to allow `SampleInstrument.set(sample)`
     melodySynth.set(melody);
     chordSynth.set(chords);
     SampleInstrument.set({
@@ -210,15 +206,15 @@ class App extends Component {
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
-                detuneVal={sample.detune} setBuffer={this.setBuffer} settings={sample} setReverse={this.setReverse} />
+                detuneVal={sample.detune} setBuffer={this.setBuffer} setReverse={this.setReverse} />
     } else if (this.state.currentPage === 'MELODY') {
       partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} changeWave={this.changeWave} settings={melody} />
+                octaveHandler={this.octaveHandler} changeWave={this.changeWave} />
     } else if (this.state.currentPage === 'RESULTS') {
       partial = <Results results={this.state.searchResults} setUrl={this.setUrl} />
     } else if (this.state.currentPage === 'CHORDS') {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                octaveHandler={this.octaveHandler} changeWave={this.changeWave} settings={chords} />
+                octaveHandler={this.octaveHandler} changeWave={this.changeWave} />
     } else if (this.state.currentPage === 'GLOBAL') {
       partial = <Global startAll={this.startAll} stopAll={this.stopAll} />
     }

@@ -17,8 +17,6 @@ class Melody extends Component {
 
   render() {
 
-    // melodySynth.set(this.props.settings);
-
     return (
       <div className="instrument melody">
         <h1>MELODY</h1>

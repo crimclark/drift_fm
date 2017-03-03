@@ -1,6 +1,6 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
-
+import './login.css'
 
 
 const Login = ({setLoggedIn}) => {
@@ -31,14 +31,25 @@ const Login = ({setLoggedIn}) => {
 
   const client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
+  // const style= {
+  //   position: 'absolute',
+  //   top: 0,
+  //   bottom: 0,
+  //   left: 0,
+  //   right: 0,
+  //   margin: 'auto'
+  // }
+
   return (
-    <GoogleLogin
-      clientId={client_id}
-      buttonText="Login"
-      onSuccess={responseGoogle}
-      onFailure={responseGoogle}
-      className="pure-button"
-    />
+    <div className="login">
+      <GoogleLogin
+        clientId={client_id}
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        className="pure-button"
+      />
+    </div>
     )
 }
 
