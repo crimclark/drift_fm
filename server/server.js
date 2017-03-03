@@ -10,7 +10,6 @@ require('./db/config');
 app.use(require('cors')());
 
 app.use(morgan('dev'));
-// app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());
 app.use('/', require('./routes/index'))
