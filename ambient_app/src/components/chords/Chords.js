@@ -18,7 +18,7 @@ class Chords extends Component {
 
   render() {
 
-    chordSynth.set(this.props.settings);
+    // chordSynth.set(this.props.settings);
 
     return (
       <div className="instrument chords">

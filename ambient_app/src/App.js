@@ -10,6 +10,9 @@ import Nav from './components/nav/Nav';
 import SampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
 
+import { melodySynth, melodyPattern } from './components/melody/melodyInstrument';
+import { chordPattern, chordSynth } from './components/chords/chordInstrument';
+
 class App extends Component {
 
   constructor(){
@@ -49,6 +52,7 @@ class App extends Component {
     this.setLoggedIn = this.setLoggedIn.bind(this);
     this.setReverse = this.setReverse.bind(this);
     this.startAll = this.startAll.bind(this);
+    this.stopAll = this.stopAll.bind(this);
   }
 
   componentDidMount() {
@@ -147,9 +151,11 @@ class App extends Component {
     }
   }
 
-  // startAll(patterns) {
-  //     patterns.start();
-  // }
+  stopAll(...patterns) {
+    for (var i = 0; i < patterns.length; i++) {
+      patterns[i].stop();
+    }
+  }
 
   startClickHandler(pattern) {
     pattern.start();
@@ -192,6 +198,14 @@ class App extends Component {
 
   render() {
     const { sample, chords, melody } = this.state;
+
+    melodySynth.set(melody);
+    chordSynth.set(chords);
+    SampleInstrument.set({
+      detune: sample.detune
+    });
+    this.setBuffer(sample.url);
+
     let partial;
     if (this.state.currentPage === 'SAMPLE') {
       partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
@@ -206,7 +220,7 @@ class App extends Component {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 octaveHandler={this.octaveHandler} changeWave={this.changeWave} settings={chords} />
     } else if (this.state.currentPage === 'GLOBAL') {
-      partial = <Global startAll={this.startAll} />
+      partial = <Global startAll={this.startAll} stopAll={this.stopAll} />
     }
 
     if (this.state.loggedIn) {
@@ -224,6 +238,5 @@ class App extends Component {
     }
   }
 }
-
 
 export default App;

@@ -59,11 +59,11 @@ class Sample extends Component {
 
   render() {
 
-    sampleInstrument.set({
-      detune: this.props.detuneVal
-    });
+    // sampleInstrument.set({
+    //   detune: this.props.detuneVal
+    // });
 
-    this.props.setBuffer(this.props.url);
+    // this.props.setBuffer(this.props.url);
 
     return (
       <div className="instrument sampler">

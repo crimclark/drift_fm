@@ -36,7 +36,10 @@ class Global extends Component {
             samplePattern={sampleInstrument}>
             START ALL
           </AllButton>
-          <AllButton>
+          <AllButton handleStart={this.props.stopAll}
+            melodyPattern={melodyPattern}
+            chordPattern={chordPattern}
+            samplePattern={sampleInstrument}>
             STOP ALL
           </AllButton>
         </div>
