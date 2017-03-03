@@ -191,7 +191,7 @@ class App extends Component {
   }
 
   handleSave() {
-    fetch('/save', {
+    fetch('https://guarded-oasis-75638.herokuapp.com/save', {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
