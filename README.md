@@ -25,7 +25,7 @@
 
 ### Major Hurdles
 
-**My main issues were organizational, e.g. determing the best components to store state and methods in order to update the DOM, perform crud operations and update the instrument settings.**
+**My main issues were organizational, e.g. determining the best components to store state and methods in order to update the DOM, perform crud operations and update the instrument settings.**
 
 ### Routes
 
