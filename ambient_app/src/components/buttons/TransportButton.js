@@ -11,6 +11,8 @@ class TransportButton extends Component {
     if (mode === 'all') {
       const [melodyPattern, chordPattern, sampleInstrument] = pattern;
       handleClick(melodyPattern, chordPattern, sampleInstrument);
+    } else {
+      handleClick(pattern);
     }
   }
 
