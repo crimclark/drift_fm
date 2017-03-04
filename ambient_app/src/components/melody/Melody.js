@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Transpose from '../controls/Transpose';
 import Transport from '../controls/Transport';
 import Waveform from '../controls/Waveform';

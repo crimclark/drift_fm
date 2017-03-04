@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import StartButton from '../buttons/StartButton';
-import StopButton from '../buttons/StopButton';
+import Transport from '../controls/Transport';
 import sampleInstrument from './SampleInstrument';
 import './sampler.css';
 import CustomSlider from '../buttons/CustomSlider';
@@ -9,8 +8,7 @@ class Sample extends Component {
   constructor() {
     super()
     this.state = {
-      samplePattern: sampleInstrument,
-      query: '',
+      query: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,8 +40,14 @@ class Sample extends Component {
   }
 
   searchFreesound(query){
-    const token = process.env.REACT_APP_FREESOUND_TOKEN;
-    // const token = 'YtAc01pBCxzzNZznWsSHQ2pvJ73M7dBH8kyQNyzs';
+
+    // prod
+
+    // const token = process.env.REACT_APP_FREESOUND_TOKEN;
+
+    // dev
+    const token = 'YtAc01pBCxzzNZznWsSHQ2pvJ73M7dBH8kyQNyzs';
+
     const url = `https://www.freesound.org/apiv2/search/text/?query=${query}&fields=name,previews&token=${token}`;
     fetch(url).then( res => res.json() ).then( res => {
       this.props.setResults(res.results);
@@ -51,6 +55,7 @@ class Sample extends Component {
   }
 
   render() {
+    const {detuneVal, setSliderVal, startClickHandler, stopClickHandler} = this.props;
 
     return (
       <div className="instrument sampler">
@@ -65,12 +70,10 @@ class Sample extends Component {
           <button className="pure-button" onClick={this.handleClick}>Reverse</button>
         </div>
         <div>
-          Speed: <CustomSlider value={this.props.detuneVal} setSliderVal={this.props.setSliderVal} />
+          Speed: <CustomSlider value={detuneVal} setSliderVal={setSliderVal} />
         </div>
-        <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.samplePattern}>
-        Start
-        </StartButton>
-        <StopButton stopClickHandler={this.props.stopClickHandler} pattern={this.state.samplePattern} />
+        <Transport handleStart={startClickHandler} handleStop={stopClickHandler}
+        pattern={sampleInstrument} startText='START' stopText='STOP' mode='one' />
       </div>
       )
   }
