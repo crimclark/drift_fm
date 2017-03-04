@@ -3,10 +3,7 @@ import StartButton from '../buttons/StartButton';
 import StopButton from '../buttons/StopButton';
 import { chordPattern } from './chordInstrument';
 import Transpose from '../controls/Transpose';
-import WaveButton from '../buttons/WaveButton';
-import sinewave from '../../sinewave.png'
-import sawtooth from '../../sawtooth.png'
-import squarewave from '../../squarewave.png'
+import Waveform from '../controls/Waveform';
 import './chords.css';
 
 class Chords extends Component {
@@ -29,9 +26,7 @@ class Chords extends Component {
         </div>
         <div>
         Waveform:
-          <WaveButton wave='sine' synth='chords' changeWave={this.props.changeWave} img={sinewave} alt='sine' />
-          <WaveButton wave='square' synth='chords' changeWave={this.props.changeWave} img={squarewave} alt='square' />
-          <WaveButton wave='sawtooth' synth='chords' changeWave={this.props.changeWave} img={sawtooth} alt='saw' />
+          <Waveform changeWave={this.props.changeWave} synth='chords' />
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.chordPattern}>
           Start

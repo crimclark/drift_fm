@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import StartButton from '../buttons/StartButton';
 import StopButton from '../buttons/StopButton';
 import Transpose from '../controls/Transpose';
+import Waveform from '../controls/Waveform';
 import { melodyPattern } from './melodyInstrument';
-import WaveButton from '../buttons/WaveButton';
-import sinewave from '../../sinewave.png'
-import sawtooth from '../../sawtooth.png'
-import squarewave from '../../squarewave.png'
 import './melody.css';
 
 
@@ -29,9 +26,7 @@ class Melody extends Component {
         </div>
         <div>
         Waveform:
-          <WaveButton wave='sine' synth='melody' changeWave={this.props.changeWave} img={sinewave} alt='sine' />
-          <WaveButton wave='square' synth='melody' changeWave={this.props.changeWave} img={squarewave} alt='square' />
-          <WaveButton wave='sawtooth' synth='melody' changeWave={this.props.changeWave} img={sawtooth} alt='saw' />
+          <Waveform changeWave={this.props.changeWave} synth='melody' />
         </div>
         <StartButton startClickHandler={this.props.startClickHandler} pattern={this.state.melodyPattern} >
           Start

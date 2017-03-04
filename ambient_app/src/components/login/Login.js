@@ -11,7 +11,14 @@ const Login = ({setLoggedIn}) => {
     } else {
         const {tokenId, profileObj: {email, givenName}} = response;
         const server = process.env.REACT_APP_SERVER;
-        fetch(`${server}/songs`, {
+
+        // prod route
+        // const route = `${server}/songs`;
+
+        // dev route
+        const route = '/songs';
+
+        fetch(route, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',

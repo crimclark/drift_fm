@@ -192,7 +192,14 @@ class App extends Component {
 
   handleSave() {
     const server = process.env.REACT_APP_SERVER;
-    fetch(`${server}/save`, {
+
+    // prod route
+    // const route = `${server}/save`;
+
+    // dev route
+    const route = '/save';
+
+    fetch(route, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
