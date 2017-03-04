@@ -3,7 +3,7 @@
 
 ### Technologies Used 
 
-* **MERN Stack
+* MERN Stack
     * MongoDB
     * Express.js
     * React.js
