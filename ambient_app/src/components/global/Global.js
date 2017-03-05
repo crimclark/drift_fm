@@ -7,7 +7,7 @@ import { melodyPattern } from '../melody/melodyInstrument';
 import { chordPattern } from '../chords/chordInstrument';
 import sampleInstrument from '../sample/SampleInstrument';
 
-const Global = ({detuneHandler, startAll, stopAll}) => {
+const Global = ({detuneHandler, startClickHandler, stopClickHandler}) => {
   return (
     <div className="instrument global">
       <h1>G L O B A L</h1>
@@ -18,7 +18,7 @@ const Global = ({detuneHandler, startAll, stopAll}) => {
       <div>
         <BPMSlider min={5} max={105} value={55} />
       </div>
-      <Transport handleStart={startAll} handleStop={stopAll}
+      <Transport handleStart={startClickHandler} handleStop={stopClickHandler}
       pattern={[melodyPattern, chordPattern, sampleInstrument]}
       startText='START ALL' stopText='STOP ALL' mode='all' />
     </div>

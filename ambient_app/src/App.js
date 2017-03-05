@@ -51,8 +51,6 @@ class App extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.setLoggedIn = this.setLoggedIn.bind(this);
     this.setReverse = this.setReverse.bind(this);
-    this.startAll = this.startAll.bind(this);
-    this.stopAll = this.stopAll.bind(this);
   }
 
   componentDidMount() {
@@ -136,24 +134,16 @@ class App extends Component {
     }
   }
 
-  startAll(...patterns) {
+  startClickHandler(...patterns) {
     for (var i = 0; i < patterns.length; i++) {
       patterns[i].start();
     }
   }
 
-  stopAll(...patterns) {
+  stopClickHandler(...patterns) {
     for (var i = 0; i < patterns.length; i++) {
       patterns[i].stop();
     }
-  }
-
-  startClickHandler(pattern) {
-    pattern.start('@8n');
-  }
-
-  stopClickHandler(pattern) {
-    pattern.stop();
   }
 
   detuneHandler(val, synth) {
@@ -237,7 +227,8 @@ class App extends Component {
       partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
     } else if (currentPage === 'GLOBAL') {
-      partial = <Global startAll={this.startAll} stopAll={this.stopAll} detuneHandler={this.detuneHandler} />
+      partial = <Global startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+                detuneHandler={this.detuneHandler} />
     }
 
     if (loggedIn) {
