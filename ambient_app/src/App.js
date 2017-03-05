@@ -9,6 +9,7 @@ import Global from './components/global/Global';
 import Nav from './components/nav/Nav';
 import SampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
+import SaveButton from './components/buttons/SaveButton';
 
 import { melodySynth } from './components/melody/melodyInstrument';
 import { chordSynth } from './components/chords/chordInstrument';
@@ -215,20 +216,32 @@ class App extends Component {
 
     let partial;
     if (currentPage === 'SAMPLE') {
-      partial = <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      partial = <div>
+                <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
                 detuneVal={sample.detune} setBuffer={this.setBuffer} setReverse={this.setReverse} />
+                <SaveButton handleSave={this.handleSave} />
+                </div>
     } else if (currentPage === 'MELODY') {
-      partial = <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      partial = <div>
+                <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
+                <SaveButton handleSave={this.handleSave} />
+                </div>
     } else if (currentPage === 'RESULTS') {
       partial = <Results results={searchResults} setUrl={this.setUrl} />
     } else if (currentPage === 'CHORDS') {
-      partial = <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      partial = <div>
+                <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
+                <SaveButton handleSave={this.handleSave} />
+                </div>
     } else if (currentPage === 'GLOBAL') {
-      partial = <Global startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      partial = <div>
+                <Global startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
                 detuneHandler={this.detuneHandler} />
+                <SaveButton handleSave={this.handleSave} />
+                </div>
     }
 
     if (loggedIn) {
@@ -236,9 +249,13 @@ class App extends Component {
         <div className='App'>
           <Nav handleClick={this.setPage}/>
           {partial}
+
+          {/*
           <div className="save-button">
             <button className="pure-button" onClick={this.handleSave}>SAVE</button>
           </div>
+          */}
+
         </div>
       );
     } else {
