@@ -12,8 +12,9 @@ const Global = ({detuneHandler, startClickHandler, stopClickHandler}) => {
     <div className="instrument global">
       <h1>G L O B A L</h1>
       <div>
-        Transpose:
-        <Transpose detuneHandler={detuneHandler} synth='all' plus={100} minus={-100} />
+        <Transpose detuneHandler={detuneHandler} synth='all' plus={100} minus={-100}>
+          Transpose:
+        </Transpose>
       </div>
       <div>
         <BPMSlider min={5} max={105} value={55} />

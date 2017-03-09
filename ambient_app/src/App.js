@@ -235,7 +235,9 @@ class App extends Component {
                 stopClickHandler={this.stopClickHandler} handleSave={this.handleSave}
                 startText='START' stopText='STOP' mode='one' pattern={melodyPattern} >
 
-                  <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200} />
+                  <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
+                    Octave:
+                  </Transpose>
                   <Waveform changeWave={this.changeWave} synth='melody' />
 
                 </Page>
@@ -249,9 +251,11 @@ class App extends Component {
       //           </div>
       partial = <Page header='C H O R D S' color='#575F8B' startClickHandler={this.startClickHandler}
                 stopClickHandler={this.stopClickHandler} handleSave={this.handleSave}
-                startText='START' stopText='STOP' mode='one' pattern={chordPattern} >
+                mode='one' pattern={chordPattern} >
 
-                  <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200} />
+                  <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
+                    Octave:
+                  </Transpose>
                   <Waveform changeWave={this.changeWave} synth='chords' />
 
                 </Page>
