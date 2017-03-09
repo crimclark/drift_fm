@@ -6,13 +6,30 @@
 .title {
   font-size: 8em;
   margin-bottom: 0;
+/*  text-shadow: 4px 4px 2px red;*/
+/*  text-shadow: 4px 4px 2px #3D7622, 8px 0px 0px #59923E, 8px 0px 0px #A9D295;*/
+  text-shadow: 7px 3px 0px green;
 }
+
 
 #landing-text{
   padding-bottom: 20px;
 }
 
-#loading {
-  padding: 20px;
+
+.fadeIn {
+  -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 5s; /* Firefox < 16 */
+      -ms-animation: fadein 5s; /* Internet Explorer */
+       -o-animation: fadein 5s; /* Opera < 12.1 */
+          animation: fadein 5s;
 }
 
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.active {
+  display: none;
+}

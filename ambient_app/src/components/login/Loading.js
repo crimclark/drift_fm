@@ -1,14 +1,13 @@
 import React from 'react';
-const Spinner = require('react-spinkit');
 
 const Loader = require('halogen/ScaleLoader');
 
 const Loading = () => {
 
   return (
-      <div id="loading">
+      <div id="loading" className="fadeIn">
          <Loader color="white" size="16px" margin="4px"/>
-        <p>Waking up our server... please be patient :)</p>
+        <p>Loading...</p>
       </div>
     )
 }
