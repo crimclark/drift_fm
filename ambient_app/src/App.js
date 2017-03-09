@@ -10,9 +10,12 @@ import Nav from './components/nav/Nav';
 import SampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
 import SaveButton from './components/buttons/SaveButton';
+import { melodySynth, melodyPattern } from './components/melody/melodyInstrument';
+import { chordSynth, chordPattern } from './components/chords/chordInstrument';
 
-import { melodySynth } from './components/melody/melodyInstrument';
-import { chordSynth } from './components/chords/chordInstrument';
+import Page from './Page';
+import Transpose from './components/controls/Transpose';
+import Waveform from './components/controls/Waveform';
 
 class App extends Component {
 
@@ -223,19 +226,35 @@ class App extends Component {
                 <SaveButton handleSave={this.handleSave} />
                 </div>
     } else if (currentPage === 'MELODY') {
-      partial = <div>
-                <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
-                <SaveButton handleSave={this.handleSave} />
-                </div>
+      // partial = <div>
+      //           <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
+      //           <SaveButton handleSave={this.handleSave} />
+      //           </div>
+      partial = <Page header='M E L O D Y' color='#C16F7A' startClickHandler={this.startClickHandler}
+                stopClickHandler={this.stopClickHandler} handleSave={this.handleSave}
+                startText='START' stopText='STOP' mode='one' pattern={melodyPattern} >
+
+                  <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200} />
+                  <Waveform changeWave={this.changeWave} synth='melody' />
+
+                </Page>
     } else if (currentPage === 'RESULTS') {
       partial = <Results results={searchResults} setUrl={this.setUrl} />
     } else if (currentPage === 'CHORDS') {
-      partial = <div>
-                <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
-                <SaveButton handleSave={this.handleSave} />
-                </div>
+      // partial = <div>
+      //           <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
+      //           <SaveButton handleSave={this.handleSave} />
+      //           </div>
+      partial = <Page header='C H O R D S' color='#575F8B' startClickHandler={this.startClickHandler}
+                stopClickHandler={this.stopClickHandler} handleSave={this.handleSave}
+                startText='START' stopText='STOP' mode='one' pattern={chordPattern} >
+
+                  <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200} />
+                  <Waveform changeWave={this.changeWave} synth='chords' />
+
+                </Page>
     } else if (currentPage === 'GLOBAL') {
       partial = <div>
                 <Global startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
@@ -249,13 +268,6 @@ class App extends Component {
         <div className='App'>
           <Nav handleClick={this.setPage}/>
           {partial}
-
-          {/*
-          <div className="save-button">
-            <button className="pure-button" onClick={this.handleSave}>SAVE</button>
-          </div>
-          */}
-
         </div>
       );
     } else {

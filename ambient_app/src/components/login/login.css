@@ -1,12 +1,18 @@
-.login {
-  display: inline-block;
-  width: 70px;
-  height: 35px;
-/*  background-color: red;*/
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
+.landing {
+  text-align: center;
+  color: white;
 }
+
+.title {
+  font-size: 8em;
+  margin-bottom: 0;
+}
+
+#landing-text{
+  padding-bottom: 20px;
+}
+
+#loading {
+  padding: 20px;
+}
+
