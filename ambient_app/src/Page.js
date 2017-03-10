@@ -11,7 +11,7 @@ const Page = ({header, color, children, startClickHandler, stopClickHandler, pat
           {children}
 
           <Transport handleStart={startClickHandler} handleStop={stopClickHandler}
-          pattern={pattern} startText={startText} stopText={stopText} mode={mode} />
+          pattern={pattern} mode={mode} />
         </div>
         <SaveButton handleSave={handleSave} />
       </div>

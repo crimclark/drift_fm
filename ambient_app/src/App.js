@@ -188,10 +188,10 @@ class App extends Component {
     const server = process.env.REACT_APP_SERVER;
 
     // prod route
-    // const route = `${server}/save`;
+    const route = `${server}/save`;
 
     // dev route
-    const route = '/save';
+    // const route = '/save';
 
     fetch(route, {
       method: 'PUT',
@@ -207,6 +207,13 @@ class App extends Component {
 
   render() {
     const { sample, chords, melody, currentPage, searchResults, loggedIn } = this.state;
+
+    // same props for every <Page> component
+    const pageProps = {
+      startClickHandler: this.startClickHandler,
+      stopClickHandler: this.stopClickHandler,
+      handleSave: this.handleSave
+    }
 
     //initialize instruments to settings from state
     //need to refactor sample model to allow `SampleInstrument.set(sample)`
@@ -231,9 +238,8 @@ class App extends Component {
       //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
       //           <SaveButton handleSave={this.handleSave} />
       //           </div>
-      partial = <Page header='M E L O D Y' color='#C16F7A' startClickHandler={this.startClickHandler}
-                stopClickHandler={this.stopClickHandler} handleSave={this.handleSave}
-                startText='START' stopText='STOP' mode='one' pattern={melodyPattern} >
+      partial = <Page header='M E L O D Y' color='#C16F7A' mode='one' pattern={melodyPattern}
+                  {...pageProps} >
 
                   <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
                     Octave:
@@ -249,9 +255,8 @@ class App extends Component {
       //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
       //           <SaveButton handleSave={this.handleSave} />
       //           </div>
-      partial = <Page header='C H O R D S' color='#575F8B' startClickHandler={this.startClickHandler}
-                stopClickHandler={this.stopClickHandler} handleSave={this.handleSave}
-                mode='one' pattern={chordPattern} >
+      partial = <Page header='C H O R D S' color='#575F8B' mode='one' pattern={chordPattern}
+                  {...pageProps} >
 
                   <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
                     Octave:
