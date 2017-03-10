@@ -238,8 +238,7 @@ class App extends Component {
       //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
       //           <SaveButton handleSave={this.handleSave} />
       //           </div>
-      partial = <Page header='M E L O D Y' color='#C16F7A' mode='one' pattern={melodyPattern}
-                  {...pageProps} >
+      partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
 
                   <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
                     Octave:
@@ -255,8 +254,7 @@ class App extends Component {
       //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
       //           <SaveButton handleSave={this.handleSave} />
       //           </div>
-      partial = <Page header='C H O R D S' color='#575F8B' mode='one' pattern={chordPattern}
-                  {...pageProps} >
+      partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
 
                   <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
                     Octave:

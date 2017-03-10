@@ -3,6 +3,11 @@ import Transport from './components/controls/Transport';
 import SaveButton from './components/buttons/SaveButton';
 
 const Page = ({header, color, children, startClickHandler, stopClickHandler, pattern, startText, stopText, mode, handleSave}) => {
+
+    if (mode) {
+      console.log(mode);
+    }
+
     return (
       <div>
         <div className="instrument" style={{backgroundColor: color}}>
