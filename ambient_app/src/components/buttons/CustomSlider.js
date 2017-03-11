@@ -24,6 +24,7 @@ class CustomSlider extends Component {
   render() {
     return (
       <div className="custom-slider">
+        {this.props.children}
         <Slider value={this.state.value} min={-2400} max={2400}
         onChange={this.onSliderChange} marks={{0: ''}} />
       </div>
