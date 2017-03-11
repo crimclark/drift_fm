@@ -73,7 +73,9 @@ class Login extends Component {
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}
               className="pure-button"
+              id="login"
             />
+            <label for="login">Login with Google</label>
           </div>
         {loading}
       </div>

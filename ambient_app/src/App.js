@@ -7,7 +7,7 @@ import Sample from './components/sample/Sample';
 import Results from './components/sample/Results';
 import Global from './components/global/Global';
 import Nav from './components/nav/Nav';
-import SampleInstrument from './components/sample/SampleInstrument';
+import sampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
 import SaveButton from './components/buttons/SaveButton';
 import { melodySynth, melodyPattern } from './components/melody/melodyInstrument';
@@ -97,7 +97,7 @@ class App extends Component {
 
   setBuffer(url) {
     const buffer = new Tone.Buffer(url, () => {
-      SampleInstrument.set({'buffer': buffer})
+      sampleInstrument.set({'buffer': buffer})
     });
   }
 
@@ -219,7 +219,7 @@ class App extends Component {
     //need to refactor sample model to allow `SampleInstrument.set(sample)`
     melodySynth.set(melody);
     chordSynth.set(chords);
-    SampleInstrument.set({
+    sampleInstrument.set({
       detune: sample.detune
     });
     this.setBuffer(sample.url);
@@ -233,11 +233,6 @@ class App extends Component {
                 <SaveButton handleSave={this.handleSave} />
                 </div>
     } else if (currentPage === 'MELODY') {
-      // partial = <div>
-      //           <Melody startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-      //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
-      //           <SaveButton handleSave={this.handleSave} />
-      //           </div>
       partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
 
                   <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
@@ -249,11 +244,6 @@ class App extends Component {
     } else if (currentPage === 'RESULTS') {
       partial = <Results results={searchResults} setUrl={this.setUrl} />
     } else if (currentPage === 'CHORDS') {
-      // partial = <div>
-      //           <Chords startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-      //           detuneHandler={this.detuneHandler} changeWave={this.changeWave} />
-      //           <SaveButton handleSave={this.handleSave} />
-      //           </div>
       partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
 
                   <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
@@ -263,11 +253,19 @@ class App extends Component {
 
                 </Page>
     } else if (currentPage === 'GLOBAL') {
-      partial = <div>
-                <Global startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                detuneHandler={this.detuneHandler} />
-                <SaveButton handleSave={this.handleSave} />
-                </div>
+      // partial = <div>
+      //           <Global startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      //           detuneHandler={this.detuneHandler} />
+      //           <SaveButton handleSave={this.handleSave} />
+      //           </div>
+      partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
+                mode='all' {...pageProps}>
+
+                  <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
+                    Transpose:
+                  </Transpose>
+
+                </Page>
     }
 
     if (loggedIn) {

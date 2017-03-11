@@ -2,11 +2,7 @@ import React from 'react';
 import Transport from './components/controls/Transport';
 import SaveButton from './components/buttons/SaveButton';
 
-const Page = ({header, color, children, startClickHandler, stopClickHandler, pattern, startText, stopText, mode, handleSave}) => {
-
-    if (mode) {
-      console.log(mode);
-    }
+const Page = ({header, color, children, startClickHandler, stopClickHandler, pattern, mode, handleSave}) => {
 
     return (
       <div>
