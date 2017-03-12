@@ -1,5 +1,5 @@
 import React from 'react';
-import './sampler.css';
+import './results.css';
 
 const Results = ({results, setUrl}) => {
     const samples = results.map( res => {

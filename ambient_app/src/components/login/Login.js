@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
-import Heading from './Heading';
 import Loading from './Loading';
 import './login.css'
 const server = process.env.REACT_APP_SERVER;
@@ -75,7 +74,7 @@ class Login extends Component {
               className="pure-button"
               id="login"
             />
-            <label for="login">Login with Google</label>
+            <label htmlFor="login">Login with Google</label>
           </div>
         {loading}
       </div>

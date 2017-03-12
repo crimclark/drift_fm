@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import Tone from 'tone';
 import './App.css';
-import Chords from './components/chords/Chords';
-import Melody from './components/melody/Melody';
-import Sample from './components/sample/Sample';
 import Results from './components/sample/Results';
-import Global from './components/global/Global';
 import Nav from './components/nav/Nav';
 import sampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
-import SaveButton from './components/buttons/SaveButton';
 import { melodySynth, melodyPattern } from './components/melody/melodyInstrument';
 import { chordSynth, chordPattern } from './components/chords/chordInstrument';
-
 import Page from './Page';
 import Transpose from './components/controls/Transpose';
 import Waveform from './components/controls/Waveform';
