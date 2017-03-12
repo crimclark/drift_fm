@@ -229,14 +229,8 @@ class App extends Component {
 
     let partial;
     if (currentPage === 'SAMPLE') {
-      // partial = <div>
-      //           <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-      //           setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
-      //           detuneVal={sample.detune} setBuffer={this.setBuffer} setReverse={this.setReverse} />
-      //           <SaveButton handleSave={this.handleSave} />
-      //           </div>
-
       partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
+
                   <Search setResults={this.setResults}/>
                   <Reverse setReverse={this.setReverse}/>
                   <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
@@ -254,9 +248,8 @@ class App extends Component {
                   <Waveform changeWave={this.changeWave} synth='melody' />
 
                 </Page>
-    } else if (currentPage === 'RESULTS') {
-      partial = <Results results={searchResults} setUrl={this.setUrl} />
-    } else if (currentPage === 'CHORDS') {
+    }
+    else if (currentPage === 'CHORDS') {
       partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
 
                   <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
@@ -266,11 +259,6 @@ class App extends Component {
 
                 </Page>
     } else if (currentPage === 'GLOBAL') {
-      // partial = <div>
-      //           <Global startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-      //           detuneHandler={this.detuneHandler} />
-      //           <SaveButton handleSave={this.handleSave} />
-      //           </div>
       partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
                 mode='all' {...pageProps}>
 
@@ -279,6 +267,8 @@ class App extends Component {
                   </Transpose>
 
                 </Page>
+    } else if (currentPage === 'RESULTS') {
+      partial = <Results results={searchResults} setUrl={this.setUrl} />
     }
 
     if (loggedIn) {
