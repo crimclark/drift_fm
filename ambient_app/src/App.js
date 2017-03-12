@@ -16,6 +16,9 @@ import { chordSynth, chordPattern } from './components/chords/chordInstrument';
 import Page from './Page';
 import Transpose from './components/controls/Transpose';
 import Waveform from './components/controls/Waveform';
+import Search from './components/controls/Search';
+import Reverse from './components/controls/Reverse';
+import CustomSlider from './components/buttons/CustomSlider';
 
 class App extends Component {
 
@@ -59,7 +62,7 @@ class App extends Component {
 
   componentDidMount() {
     Tone.Transport.bpm.value = 60;
-    Tone.Transport.start();
+    Tone.Transport.start('+0.5');
   }
 
   setLoggedIn(song) {
@@ -140,13 +143,13 @@ class App extends Component {
 
   startClickHandler(...patterns) {
     for (var i = 0; i < patterns.length; i++) {
-      patterns[i].start();
+      patterns[i].start('+0.5');
     }
   }
 
   stopClickHandler(...patterns) {
     for (var i = 0; i < patterns.length; i++) {
-      patterns[i].stop();
+      patterns[i].stop('+0.5');
     }
   }
 
@@ -226,12 +229,22 @@ class App extends Component {
 
     let partial;
     if (currentPage === 'SAMPLE') {
-      partial = <div>
-                <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
-                setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
-                detuneVal={sample.detune} setBuffer={this.setBuffer} setReverse={this.setReverse} />
-                <SaveButton handleSave={this.handleSave} />
-                </div>
+      // partial = <div>
+      //           <Sample startClickHandler={this.startClickHandler} stopClickHandler={this.stopClickHandler}
+      //           setResults={this.setResults} url={sample.url} setSliderVal={this.setSliderVal}
+      //           detuneVal={sample.detune} setBuffer={this.setBuffer} setReverse={this.setReverse} />
+      //           <SaveButton handleSave={this.handleSave} />
+      //           </div>
+
+      partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
+                  <Search setResults={this.setResults}/>
+                  <Reverse setReverse={this.setReverse}/>
+                  <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
+                    Speed:
+                  </CustomSlider>
+
+                </Page>
+
     } else if (currentPage === 'MELODY') {
       partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
 
