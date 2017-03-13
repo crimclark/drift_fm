@@ -41,7 +41,7 @@
   width: 215px;
   margin: 0 auto;
 /*  border-radius: 12px; */
-    padding: 7px 0 7px 0;
+  padding: 7px 0 7px 0;
 }
 
 #googlelogin:after {
@@ -61,3 +61,58 @@
   transform: skew(-30deg, 0deg);
   box-shadow: 12px 9px 0px 0px #896D28;
 }
+
+
+#guest {
+/*  margin-right: 25px;*/
+}
+
+#guest-btn {
+  position: absolute;
+  left: 0;
+  top: 7px;
+}
+
+#guestlogin {
+  background-color: #C16F7A;
+  position: relative;
+  width: 210px;
+  margin: 0 auto;
+  margin-top: 35px;
+  padding: 7px 0 7px 0;
+  height: 43px;
+}
+
+#guestlogin:after {
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 228px;
+  height: 100%;
+  top: 0;
+  left: -37px;
+  z-index: -1;
+  background: #C16F7A;
+  border-right: 20px solid #C16F7A;
+  transform-origin: bottom left;
+  -ms-transform: skew(-30deg, 0deg);
+  -webkit-transform: skew(-30deg, 0deg);
+  transform: skew(-30deg, 0deg);
+  box-shadow: 12px 9px 0px 0px #822734;
+}
+
+#guestlabel {
+  position: absolute;
+  top: 13px;
+  width: 120px;
+  right: 2px;
+}
+
+#disable-message {
+  font-size: .7em;
+  margin-top: 2px;
+  display: block;
+/*  float: left;*/
+}
+
+

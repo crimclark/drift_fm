@@ -54,7 +54,7 @@ class Login extends Component {
     //wake up heroku
     fetch(`${server}/songs`);
 
-    var loading;
+    let loading;
     if (this.state.loading) {
       loading = <Loading />
     }
@@ -75,6 +75,13 @@ class Login extends Component {
               id="login"
             />
             <label htmlFor="login">Login with Google</label>
+          </div>
+          <div className={this.state.active} id="guestlogin">
+            <button className="pure-button" id="guest-btn">Guest</button>
+            <div id="guestlabel">
+              <label htmlFor="guest">Login as Guest
+              <span id="disable-message">(Saving Disabled)</span></label>
+            </div>
           </div>
         {loading}
       </div>
