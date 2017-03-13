@@ -13,6 +13,7 @@ class Login extends Component {
       active: 'inactive'
     }
     this.responseGoogle = this.responseGoogle.bind(this);
+    this.handleGuestClick = this.handleGuestClick.bind(this);
   }
 
   responseGoogle(response) {
@@ -49,6 +50,10 @@ class Login extends Component {
     }
   }
 
+  handleGuestClick() {
+    this.props.setGuest();
+  }
+
   render() {
 
     //wake up heroku
@@ -77,7 +82,7 @@ class Login extends Component {
             <label htmlFor="login">Login with Google</label>
           </div>
           <div className={this.state.active} id="guestlogin">
-            <button className="pure-button" id="guest-btn">Guest</button>
+            <button className="pure-button" id="guest-btn" onClick={this.handleGuestClick}>Guest</button>
             <div id="guestlabel">
               <label htmlFor="guest">Login as Guest
               <span id="disable-message">(Saving Disabled)</span></label>

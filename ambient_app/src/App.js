@@ -20,6 +20,7 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
+      guest: false,
       currentPage: "LOGIN",
       searchResults: null,
       chords: {
@@ -51,6 +52,7 @@ class App extends Component {
     this.setSliderVal = this.setSliderVal.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.setLoggedIn = this.setLoggedIn.bind(this);
+    this.setGuest = this.setGuest.bind(this);
     this.setReverse = this.setReverse.bind(this);
   }
 
@@ -67,6 +69,12 @@ class App extends Component {
       sample: sample[0],
       chords: chords[0],
       melody: melody[0]
+    })
+  }
+
+  setGuest() {
+    this.setState({
+      guest: true
     })
   }
 
@@ -203,13 +211,14 @@ class App extends Component {
   }
 
   render() {
-    const { sample, chords, melody, currentPage, searchResults, loggedIn } = this.state;
+    const { sample, chords, melody, currentPage, searchResults, loggedIn, guest } = this.state;
 
     // same props for every <Page> component
     const pageProps = {
       startClickHandler: this.startClickHandler,
       stopClickHandler: this.stopClickHandler,
-      handleSave: this.handleSave
+      handleSave: this.handleSave,
+      guest: guest
     }
 
     //initialize instruments to settings from state
@@ -265,7 +274,7 @@ class App extends Component {
       partial = <Results results={searchResults} setUrl={this.setUrl} />
     }
 
-    if (loggedIn) {
+    if (loggedIn || guest) {
       return (
         <div className='App'>
           <Nav handleClick={this.setPage}/>
@@ -274,7 +283,7 @@ class App extends Component {
       );
     } else {
       return (
-        <Login setLoggedIn={this.setLoggedIn} />
+        <Login setLoggedIn={this.setLoggedIn} setGuest={this.setGuest} />
         )
     }
   }
