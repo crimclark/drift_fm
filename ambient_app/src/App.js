@@ -8,6 +8,7 @@ import Login from './components/login/Login';
 import { melodySynth, melodyPattern } from './components/melody/melodyInstrument';
 import { chordSynth, chordPattern } from './components/chords/chordInstrument';
 import Page from './Page';
+import Welcome from './components/welcome/Welcome';
 import Transpose from './components/controls/Transpose';
 import Waveform from './components/controls/Waveform';
 import Search from './components/controls/Search';
@@ -65,6 +66,7 @@ class App extends Component {
     const { chords, melody, sample, _id } = song;
     this.setState({
       loggedIn: true,
+      currentPage: 'WELCOME',
       _id: _id,
       sample: sample[0],
       chords: chords[0],
@@ -74,7 +76,8 @@ class App extends Component {
 
   setGuest() {
     this.setState({
-      guest: true
+      guest: true,
+      currentPage: 'WELCOME'
     })
   }
 
@@ -272,6 +275,8 @@ class App extends Component {
                 </Page>
     } else if (currentPage === 'RESULTS') {
       partial = <Results results={searchResults} setUrl={this.setUrl} />
+    } else if (currentPage === 'WELCOME') {
+      partial = <Welcome />
     }
 
     if (loggedIn || guest) {
