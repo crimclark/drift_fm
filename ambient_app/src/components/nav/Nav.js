@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavLink from './NavLink';
+import './nav.css';
 
 class Nav extends Component {
 

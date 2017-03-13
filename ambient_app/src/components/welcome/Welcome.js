@@ -4,6 +4,7 @@ import './welcome.css';
 const Welcome = () => {
 
   return (
+    <div>
       <div id="welcome-container">
         <h1 id="welcome">WELCOME</h1>
         <div id="welcome-text">
@@ -12,8 +13,13 @@ const Welcome = () => {
           and press the "Start" button.  Play around with the instrument settings
           to hear how they alter the sound, or simply let the sound drift along
           in the background as you go about the rest of your day.
+
         </div>
       </div>
+      <p id="disclaimer">Note: The Web Audio API is an experimental technology which is not yet
+      supported by all browsers.  For the best exprience, please consider using
+      the latest versions of Google Chrome or Mozilla Firefox.</p>
+    </div>
     )
 }
 

@@ -18,3 +18,20 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+@media (max-width: 510px) {
+
+  #welcome {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+}
+
+#disclaimer {
+  margin: 75px;
+  font-size: .8em;
+  background: -webkit-linear-gradient(white, #c6c6c6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
