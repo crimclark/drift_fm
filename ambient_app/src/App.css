@@ -43,6 +43,22 @@ ul {
   border-radius: 10px;
 }
 
+@media (max-width: 510px) {
+
+  .instrument {
+    width: 350px;
+  }
+
+}
+
+@media (max-width: 320px) {
+
+  .instrument {
+    width: 300px;
+  }
+
+}
+
 #wave-button {
   width: 70px;
   height: 50px;
