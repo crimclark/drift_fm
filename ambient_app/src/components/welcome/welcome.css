@@ -4,7 +4,7 @@
 }
 
 #welcome {
-  background: -webkit-linear-gradient(#C16F7A, #575F8B);
+  background: -webkit-linear-gradient(#575F8B, #C16F7A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
