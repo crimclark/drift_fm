@@ -1,4 +1,4 @@
-# Generative Music App
+# Drift.FM - Generative Music App
 # ![](assets/screenshot.png)
 
 ### Technologies Used 
