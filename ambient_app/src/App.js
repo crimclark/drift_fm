@@ -209,7 +209,7 @@ class App extends Component {
       },
       body: JSON.stringify(this.state)
     })
-    .then( console.log('saved!') );
+    // .then( console.log('saved!') );
 
   }
 

@@ -3,8 +3,6 @@ import Transport from './components/controls/Transport';
 import SaveButton from './components/buttons/SaveButton';
 
 const Page = ({header, color, children, startClickHandler, stopClickHandler, pattern, mode, handleSave, guest}) => {
-  console.log('guest: ', guest)
-
   let save;
   if (!guest) {
     save = <SaveButton handleSave={handleSave} />
