@@ -14,6 +14,7 @@ import Waveform from './components/controls/Waveform';
 import Search from './components/controls/Search';
 import Reverse from './components/controls/Reverse';
 import CustomSlider from './components/buttons/CustomSlider';
+import SampleName from './components/sample/SampleName';
 
 class App extends Component {
 
@@ -39,7 +40,8 @@ class App extends Component {
       sample: {
         detune: 0,
         url: null,
-        reverse: false
+        reverse: false,
+        name: ''
       }
     }
     this.setPage = this.setPage.bind(this);
@@ -109,11 +111,12 @@ class App extends Component {
     });
   }
 
-  setUrl(url) {
+  setUrl(url, name) {
     this.setState({
       sample: {
         ...this.state.sample,
-        url: url
+        url: url,
+        name: name
       }
     })
     this.setBuffer(url);
@@ -238,6 +241,7 @@ class App extends Component {
       partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
 
                   <Search setResults={this.setResults}/>
+                  <SampleName name={sample.name} />
                   <Reverse setReverse={this.setReverse}/>
                   <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
                     Speed:
