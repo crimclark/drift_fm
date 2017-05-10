@@ -298,7 +298,7 @@ class App extends Component {
     } else {
       return (
         <Login setLoggedIn={this.setLoggedIn} setGuest={this.setGuest} />
-        )
+      )
     }
   }
 }

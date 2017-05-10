@@ -4,10 +4,10 @@ const SampleName = ({name}) => {
   let loadMsg = !name ? 'No Sound Loaded' : name;
 
   return (
-      <div>
-        {loadMsg}
-      </div>
-    )
+    <div>
+      {loadMsg}
+    </div>
+  )
 }
 
 export default SampleName;

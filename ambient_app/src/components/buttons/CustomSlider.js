@@ -30,7 +30,6 @@ class CustomSlider extends Component {
       </div>
     );
   }
-
 }
 
 export default CustomSlider

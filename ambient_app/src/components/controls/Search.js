@@ -40,7 +40,7 @@ class Search extends Component {
           <button className="pure-button">Search</button>
         </form>
       </div>
-      )
+    )
   }
 }
 

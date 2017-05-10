@@ -10,7 +10,7 @@ const Results = ({results, setUrl}) => {
           <button className="pure-button" onClick={ () => {
           setUrl(url, name);
         }}>LOAD</button>{res.name}</div>
-        );
+      );
     })
 
   return (
@@ -20,8 +20,7 @@ const Results = ({results, setUrl}) => {
       {samples}
       </ul>
     </div>
-
-    )
+  )
 }
 
 export default Results;

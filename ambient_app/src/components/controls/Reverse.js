@@ -18,7 +18,7 @@ class Reverse extends Component {
       <div>
         <button className="pure-button" onClick={this.handleClick}>Reverse</button>
       </div>
-      )
+    )
   }
 }
 

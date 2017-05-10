@@ -20,7 +20,7 @@ const Page = ({header, color, children, startClickHandler, stopClickHandler, pat
       </div>
       {save}
     </div>
-      )
+  )
 };
 
 export default Page;
