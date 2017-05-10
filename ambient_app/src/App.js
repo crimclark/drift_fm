@@ -161,6 +161,8 @@ class App extends Component {
     }
   }
 
+// refactor with switch statement
+
   detuneHandler(val, synth) {
     const {melody, chords, sample} = this.state;
     if (synth === 'melody') {
@@ -229,6 +231,8 @@ class App extends Component {
 
     //initialize instruments to settings from state
     //need to refactor sample model to allow `SampleInstrument.set(sample)`
+
+    // move this to componentdidmount
     melodySynth.set(melody);
     chordSynth.set(chords);
     sampleInstrument.set({
@@ -237,6 +241,7 @@ class App extends Component {
     this.setBuffer(sample.url);
 
     let partial;
+    // refactor with switch statement
     if (currentPage === 'SAMPLE') {
       partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
 
