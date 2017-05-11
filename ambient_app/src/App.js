@@ -149,6 +149,8 @@ class App extends Component {
           }
         })
         break;
+      default:
+        break;
     }
   }
 
@@ -198,6 +200,8 @@ class App extends Component {
             detune: sample.detune + val
           }
         })
+        break;
+      default:
         break;
     }
   }
