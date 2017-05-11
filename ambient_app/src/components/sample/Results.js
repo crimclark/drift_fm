@@ -4,8 +4,7 @@ import './results.css';
 const Results = ({results, setUrl}) => {
     const samples = results.map( res => {
       const url = res.previews['preview-hq-mp3'];
-      // const { name } = res;
-      const name = res.name;
+      const { name } = res;
       return (
         <div className="sample" key={res.name}>
           <button className="pure-button" onClick={ () => {

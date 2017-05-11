@@ -154,13 +154,14 @@ class App extends Component {
 
   startClickHandler(...patterns) {
     for (var i = 0; i < patterns.length; i++) {
+      console.log(patterns[i]);
       patterns[i].start('+0.5');
     }
   }
 
   stopClickHandler(...patterns) {
     for (var i = 0; i < patterns.length; i++) {
-      patterns[i].stop('+0.5');
+      if (patterns[i].state === 'started') patterns[i].stop('+0.5');
     }
   }
 
@@ -294,53 +295,6 @@ class App extends Component {
         partial = <Welcome />
         break;
     }
-
-
-    // if (currentPage === 'SAMPLE') {
-    //   partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
-
-    //               <Search setResults={this.setResults}/>
-    //               <SampleName name={sample.name} />
-    //               <Reverse setReverse={this.setReverse}/>
-    //               <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
-    //                 Speed:
-    //               </CustomSlider>
-
-    //             </Page>
-
-    // } else if (currentPage === 'MELODY') {
-    //   partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
-
-    //               <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
-    //                 Octave:
-    //               </Transpose>
-    //               <Waveform changeWave={this.changeWave} synth='melody' />
-
-    //             </Page>
-    // }
-    // else if (currentPage === 'CHORDS') {
-    //   partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
-
-    //               <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
-    //                 Octave:
-    //               </Transpose>
-    //               <Waveform changeWave={this.changeWave} synth='chords' />
-
-    //             </Page>
-    // } else if (currentPage === 'GLOBAL') {
-    //   partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
-    //             mode='all' {...pageProps}>
-
-    //               <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
-    //                 Transpose:
-    //               </Transpose>
-
-    //             </Page>
-    // } else if (currentPage === 'RESULTS') {
-    //   partial = <Results results={searchResults} setUrl={this.setUrl} />
-    // } else if (currentPage === 'WELCOME') {
-    //   partial = <Welcome />
-    // }
 
     if (loggedIn || guest) {
       return (
