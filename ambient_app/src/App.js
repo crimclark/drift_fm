@@ -154,7 +154,6 @@ class App extends Component {
 
   startClickHandler(...patterns) {
     for (var i = 0; i < patterns.length; i++) {
-      console.log(patterns[i]);
       patterns[i].start('+0.5');
     }
   }

@@ -6,11 +6,6 @@ class TransposeButton extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    // let pattern = this.props.pattern;
-    // this.props.startClickHandler(pattern);
-  }
-
   render() {
     return (
       <button className="pure-button" onClick={this.handleClick}>{this.props.children}</button>
