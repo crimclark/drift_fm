@@ -14,7 +14,7 @@ class DetuneButton extends Component {
   render() {
     return (
       <button onClick={this.handleClick} className="pure-button">{this.props.children}</button>
-      )
+    )
   }
 }
 

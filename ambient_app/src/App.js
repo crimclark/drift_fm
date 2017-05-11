@@ -132,20 +132,23 @@ class App extends Component {
   }
 
   changeWave(wave, synth) {
-    if (synth === 'melody') {
-      this.setState({
-        melody: {
-          ...this.state.melody,
-          oscillator: {type: wave}
-        }
-      })
-    } else if (synth === 'chords') {
-      this.setState({
-        chords: {
-          ...this.state.chords,
-          oscillator: {type: wave}
-        }
-      })
+    switch (synth) {
+      case 'melody':
+        this.setState({
+          melody: {
+            ...this.state.melody,
+            oscillator: {type: wave}
+          }
+        })
+        break;
+      case 'chords':
+        this.setState({
+          chords: {
+            ...this.state.chords,
+            oscillator: {type: wave}
+          }
+        })
+        break;
     }
   }
 
@@ -161,25 +164,26 @@ class App extends Component {
     }
   }
 
-// refactor with switch statement
-
   detuneHandler(val, synth) {
     const {melody, chords, sample} = this.state;
-    if (synth === 'melody') {
-      this.setState({
-        melody: {
-          ...melody,
-          detune: melody.detune + val
-        }
-      })
-    } else if (synth === 'chords') {
+    switch(synth) {
+      case 'melody':
+        this.setState({
+          melody: {
+            ...melody,
+            detune: melody.detune + val
+          }
+        })
+        break;
+      case 'chords':
         this.setState({
           chords: {
             ...chords,
             detune: chords.detune + val
           }
         })
-      } else if (synth === 'all') {
+        break;
+      case 'all':
         this.setState({
           chords: {
             ...chords,
@@ -194,7 +198,8 @@ class App extends Component {
             detune: sample.detune + val
           }
         })
-      }
+        break;
+    }
   }
 
   handleSave() {
@@ -231,8 +236,6 @@ class App extends Component {
 
     //initialize instruments to settings from state
     //need to refactor sample model to allow `SampleInstrument.set(sample)`
-
-    // move this to componentdidmount
     melodySynth.set(melody);
     chordSynth.set(chords);
     sampleInstrument.set({
@@ -241,52 +244,103 @@ class App extends Component {
     this.setBuffer(sample.url);
 
     let partial;
-    // refactor with switch statement
-    if (currentPage === 'SAMPLE') {
-      partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
+    switch(currentPage) {
+      case 'SAMPLE':
+        partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
 
-                  <Search setResults={this.setResults}/>
-                  <SampleName name={sample.name} />
-                  <Reverse setReverse={this.setReverse}/>
-                  <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
-                    Speed:
-                  </CustomSlider>
+              <Search setResults={this.setResults}/>
+              <SampleName name={sample.name} />
+              <Reverse setReverse={this.setReverse}/>
+              <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
+                Speed:
+              </CustomSlider>
 
-                </Page>
+            </Page>
+        break;
+      case 'MELODY':
+        partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
 
-    } else if (currentPage === 'MELODY') {
-      partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
+            <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
+              Octave:
+            </Transpose>
+            <Waveform changeWave={this.changeWave} synth='melody' />
 
-                  <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
-                    Octave:
-                  </Transpose>
-                  <Waveform changeWave={this.changeWave} synth='melody' />
+          </Page>
+        break;
+      case 'CHORDS':
+        partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
 
-                </Page>
+              <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
+                Octave:
+              </Transpose>
+              <Waveform changeWave={this.changeWave} synth='chords' />
+
+            </Page>
+        break;
+      case 'GLOBAL':
+        partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
+            mode='all' {...pageProps}>
+
+              <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
+                Transpose:
+              </Transpose>
+
+            </Page>
+        break;
+      case 'RESULTS':
+        partial = <Results results={searchResults} setUrl={this.setUrl} />
+        break;
+      default:
+        partial = <Welcome />
+        break;
     }
-    else if (currentPage === 'CHORDS') {
-      partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
 
-                  <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
-                    Octave:
-                  </Transpose>
-                  <Waveform changeWave={this.changeWave} synth='chords' />
 
-                </Page>
-    } else if (currentPage === 'GLOBAL') {
-      partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
-                mode='all' {...pageProps}>
+    // if (currentPage === 'SAMPLE') {
+    //   partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
 
-                  <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
-                    Transpose:
-                  </Transpose>
+    //               <Search setResults={this.setResults}/>
+    //               <SampleName name={sample.name} />
+    //               <Reverse setReverse={this.setReverse}/>
+    //               <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
+    //                 Speed:
+    //               </CustomSlider>
 
-                </Page>
-    } else if (currentPage === 'RESULTS') {
-      partial = <Results results={searchResults} setUrl={this.setUrl} />
-    } else if (currentPage === 'WELCOME') {
-      partial = <Welcome />
-    }
+    //             </Page>
+
+    // } else if (currentPage === 'MELODY') {
+    //   partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
+
+    //               <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
+    //                 Octave:
+    //               </Transpose>
+    //               <Waveform changeWave={this.changeWave} synth='melody' />
+
+    //             </Page>
+    // }
+    // else if (currentPage === 'CHORDS') {
+    //   partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
+
+    //               <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
+    //                 Octave:
+    //               </Transpose>
+    //               <Waveform changeWave={this.changeWave} synth='chords' />
+
+    //             </Page>
+    // } else if (currentPage === 'GLOBAL') {
+    //   partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
+    //             mode='all' {...pageProps}>
+
+    //               <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
+    //                 Transpose:
+    //               </Transpose>
+
+    //             </Page>
+    // } else if (currentPage === 'RESULTS') {
+    //   partial = <Results results={searchResults} setUrl={this.setUrl} />
+    // } else if (currentPage === 'WELCOME') {
+    //   partial = <Welcome />
+    // }
 
     if (loggedIn || guest) {
       return (

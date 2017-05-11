@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 const SampleName = ({name}) => {
   let loadMsg = !name ? 'No Sound Loaded' : name;

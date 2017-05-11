@@ -7,7 +7,7 @@ const WaveButton = ({changeWave, wave, synth, img, alt}) => {
       changeWave(wave, synth)
       }} className="pure-button" id="wave-button"></img>
     </span>
-    )
+  )
 }
 
 export default WaveButton;

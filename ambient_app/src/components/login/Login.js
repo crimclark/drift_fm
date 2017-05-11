@@ -16,6 +16,11 @@ class Login extends Component {
     this.handleGuestClick = this.handleGuestClick.bind(this);
   }
 
+  // wake up heroku
+  // componentDidMount() {
+  //   fetch(`${server}/songs`);
+  // }
+
   responseGoogle(response) {
     if (response.error) {
       throw response.error;

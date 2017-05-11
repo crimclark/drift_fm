@@ -11,15 +11,13 @@ class TransportButton extends Component {
     if (mode) {
       const [melodyPattern, chordPattern, sampleInstrument] = pattern;
       handleClick(melodyPattern, chordPattern, sampleInstrument);
-    } else {
-      handleClick(pattern);
-    }
+    } else handleClick(pattern);
   }
 
   render() {
     return (
-        <button className="pure-button" onClick={this.handleClick}>{this.props.children}</button>
-      )
+      <button className="pure-button" onClick={this.handleClick}>{this.props.children}</button>
+    )
   }
 }
 

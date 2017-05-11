@@ -13,8 +13,8 @@ class TransposeButton extends Component {
 
   render() {
     return (
-        <button className="pure-button" onClick={this.handleClick}>{this.props.children}</button>
-      )
+      <button className="pure-button" onClick={this.handleClick}>{this.props.children}</button>
+    )
   }
 }
 

@@ -15,7 +15,7 @@ class SaveButton extends Component {
       <div className="save-button">
         <button className="pure-button" onClick={this.handleClick}>SAVE</button>
       </div>
-      )
+    )
   }
 }
 

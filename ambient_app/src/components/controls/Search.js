@@ -19,6 +19,7 @@ class Search extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    // const { query } = this.state;
     const query = this.state.query;
     this.searchFreesound(query);
   }

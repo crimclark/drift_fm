@@ -14,8 +14,8 @@ class NavLink extends Component {
 
   render() {
     return (
-        <li className="pure-menu-item"><a onClick={this.handleNavClick} href="#" className="pure-menu-link">{this.props.link}</a></li>
-      )
+      <li className="pure-menu-item"><a onClick={this.handleNavClick} href="#" className="pure-menu-link">{this.props.link}</a></li>
+    )
   }
 }
 
