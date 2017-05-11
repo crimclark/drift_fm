@@ -6,11 +6,7 @@ const mongoose = require('mongoose')
 
 router.get('/songs', (req, res) => {
   Song.find( {}, (err, songs) => {
-    if (err) {
-      console.log (err);
-    } else {
-      console.log(songs[0]);
-    }
+    if (err) throw err;
     res.send(songs[0]);
   })
 })
@@ -18,12 +14,8 @@ router.get('/songs', (req, res) => {
 router.put('/save', (req, res) => {
   const { _id, sample, melody, chords } = req.body;
   Song.findByIdAndUpdate(_id, {sample: sample, melody: melody, chords: chords}, (err, song) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Song state saved!');
-      res.send('saved');
-    }
+    if (err) throw err;
+    res.send('saved');
   })
 })
 
@@ -36,11 +28,10 @@ router.post('/songs', (req, res) => {
       });
       song.save()
           .then( song => {
-            console.log('created new song');
             res.send(song);
           });
     } else {
-      console.log('song found!');
+      // existing song found
       res.send(song);
     }
   })
