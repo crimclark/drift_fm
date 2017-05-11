@@ -41,7 +41,7 @@ class App extends Component {
         detune: 0,
         url: null,
         reverse: false,
-        name: ''
+        name: 'Spring Birds Loop'
       }
     }
     this.setPage = this.setPage.bind(this);
@@ -252,44 +252,44 @@ class App extends Component {
       case 'SAMPLE':
         partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
 
-              <Search setResults={this.setResults}/>
-              <SampleName name={sample.name} />
-              <Reverse setReverse={this.setReverse}/>
-              <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
-                Speed:
-              </CustomSlider>
+          <Search setResults={this.setResults}/>
+          <SampleName name={sample.name} />
+          <Reverse setReverse={this.setReverse}/>
+          <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
+            Speed:
+          </CustomSlider>
 
-            </Page>
+        </Page>
         break;
       case 'MELODY':
         partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
 
-            <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
-              Octave:
-            </Transpose>
-            <Waveform changeWave={this.changeWave} synth='melody' />
+          <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
+            Octave:
+          </Transpose>
+          <Waveform changeWave={this.changeWave} synth='melody' />
 
-          </Page>
+        </Page>
         break;
       case 'CHORDS':
         partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
 
-              <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
-                Octave:
-              </Transpose>
-              <Waveform changeWave={this.changeWave} synth='chords' />
+          <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
+            Octave:
+          </Transpose>
+          <Waveform changeWave={this.changeWave} synth='chords' />
 
-            </Page>
+        </Page>
         break;
       case 'GLOBAL':
         partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
-            mode='all' {...pageProps}>
+          mode='all' {...pageProps}>
 
-              <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
-                Transpose:
-              </Transpose>
+          <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
+            Transpose:
+          </Transpose>
 
-            </Page>
+        </Page>
         break;
       case 'RESULTS':
         partial = <Results results={searchResults} setUrl={this.setUrl} />

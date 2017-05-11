@@ -91,7 +91,7 @@ class Login extends Component {
           </div>
         {loading}
       </div>
-      )
+    )
   }
 }
 
