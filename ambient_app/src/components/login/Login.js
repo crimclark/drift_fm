@@ -32,10 +32,10 @@ class Login extends Component {
         const {tokenId, profileObj: {email, givenName}} = response;
 
         // prod route //
-        const route = `${server}/songs`;
+        // const route = `${server}/songs`;
 
         // dev route //
-        // const route = '/songs';
+        const route = '/songs';
 
         fetch(route, {
           method: 'POST',

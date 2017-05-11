@@ -210,10 +210,10 @@ class App extends Component {
     const server = process.env.REACT_APP_SERVER;
 
     // prod route
-    const route = `${server}/save`;
+    // const route = `${server}/save`;
 
     // dev route
-    // const route = '/save';
+    const route = '/save';
 
     fetch(route, {
       method: 'PUT',
