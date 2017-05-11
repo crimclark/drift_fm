@@ -17,9 +17,9 @@ class Login extends Component {
   }
 
   // wake up heroku
-  // componentDidMount() {
-  //   fetch(`${server}/songs`);
-  // }
+  componentDidMount() {
+    fetch(`${server}/songs`);
+  }
 
   responseGoogle(response) {
     if (response.error) {
@@ -60,10 +60,6 @@ class Login extends Component {
   }
 
   render() {
-
-    //wake up heroku
-    fetch(`${server}/songs`);
-
     let loading;
     if (this.state.loading) {
       loading = <Loading />

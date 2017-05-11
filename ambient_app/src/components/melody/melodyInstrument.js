@@ -3,7 +3,7 @@ import delay from '../fx/delay';
 import {randomVal, rates} from '../lib/random';
 
 
-var melodySynth = new Tone.MonoSynth({
+const melodySynth = new Tone.MonoSynth({
   'oscillator' : {
     'type' : 'sine'
   },
