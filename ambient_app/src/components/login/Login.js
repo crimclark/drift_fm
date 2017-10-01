@@ -28,14 +28,11 @@ class Login extends Component {
         this.setState({
           loading: true,
           active: 'active'
-        })
+        });
         const {tokenId, profileObj: {email, givenName}} = response;
 
-        // prod route //
+        // const route = process.env.NODE_ENV === 'development' ? '/songs' : `${server}/songs`;
         const route = `${server}/songs`;
-
-        // dev route //
-        // const route = '/songs';
 
         fetch(route, {
           method: 'POST',
@@ -51,6 +48,7 @@ class Login extends Component {
         }).then( song => song.json() )
           .then( song => {
             this.props.setLoggedIn(song);
+            console.log(song);
           })
     }
   }

@@ -1,8 +1,11 @@
 import React from 'react';
 import './results.css';
 
-const Results = ({results, setUrl}) => {
-    const samples = results.map( (res, i) => {
+const Results = ({ results, setUrl }) => {
+  let samples;
+
+  if (results) {
+    samples = results.map( (res, i) => {
       const url = res.previews['preview-hq-mp3'];
       const { name } = res;
       return (
@@ -11,7 +14,8 @@ const Results = ({results, setUrl}) => {
           setUrl(url, name);
         }}>LOAD</button>{name}</div>
       );
-    })
+    });
+  }
 
   return (
     <div className="results">
@@ -21,6 +25,6 @@ const Results = ({results, setUrl}) => {
       </ul>
     </div>
   )
-}
+};
 
 export default Results;

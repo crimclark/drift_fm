@@ -13,10 +13,11 @@ ul {
   font-size: 1.2em;
 }
 
-.save-button{
+.save-button {
   position: absolute;
   left: 0;
   right: 0;
+  bottom: -50px;
   margin: auto;
   width: 100px;
 }
@@ -35,12 +36,35 @@ ul {
 }
 
 .instrument {
-/*  background-color: #8389A3;*/
+  position: absolute;
   text-align: center;
   height: 500px;
   width: 400px;
   margin: 0 auto;
   border-radius: 10px;
+  top: 150px;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
 
 @media (max-width: 510px) {

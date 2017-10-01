@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 
 class Search extends Component {
   constructor() {
     super();
     this.state = {
       query: ''
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.searchFreesound = this.searchFreesound.bind(this);
@@ -24,11 +25,12 @@ class Search extends Component {
   }
 
   searchFreesound(query){
+    const { history, setResults } = this.props;
     const token = process.env.REACT_APP_FREESOUND_TOKEN;
-
     const url = `https://www.freesound.org/apiv2/search/text/?query=${query}&fields=name,previews&token=${token}`;
     fetch(url).then( res => res.json() ).then( res => {
-      this.props.setResults(res.results);
+      setResults(res.results);
+      history.push('/sample/search', { searchResults: res.results });
     })
   }
 
@@ -44,4 +46,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default withRouter(Search);

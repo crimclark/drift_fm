@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Tone from 'tone';
 import './App.css';
 import Results from './components/sample/Results';
 import Nav from './components/nav/Nav';
-import sampleInstrument from './components/sample/SampleInstrument';
 import Login from './components/login/Login';
-import { melodySynth, melodyPattern } from './components/melody/melodyInstrument';
-import { chordSynth, chordPattern } from './components/chords/chordInstrument';
-import Page from './Page';
+import sampleInstrument from './components/sample/SampleInstrument';
+import { melodySynth } from './components/melody/melodyInstrument';
+import { chordSynth } from './components/chords/chordInstrument';
+
 import Welcome from './components/welcome/Welcome';
-import Transpose from './components/controls/Transpose';
-import Waveform from './components/controls/Waveform';
-import Search from './components/controls/Search';
-import Reverse from './components/controls/Reverse';
-import CustomSlider from './components/buttons/CustomSlider';
-import SampleName from './components/sample/SampleName';
+import Chords from './components/chords/Chords';
+import Melody from './components/melody/Melody';
+import Sample from './components/sample/Sample';
+import Global from './components/Global';
 
 class App extends Component {
 
@@ -23,7 +23,6 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       guest: false,
-      currentPage: "LOGIN",
       searchResults: null,
       chords: {
         detune: 0,
@@ -43,8 +42,7 @@ class App extends Component {
         reverse: false,
         name: 'Spring Birds Loop'
       }
-    }
-    this.setPage = this.setPage.bind(this);
+    };
     this.setResults = this.setResults.bind(this);
     this.startClickHandler = this.startClickHandler.bind(this);
     this.stopClickHandler = this.stopClickHandler.bind(this);
@@ -68,7 +66,6 @@ class App extends Component {
     const { chords, melody, sample, _id } = song;
     this.setState({
       loggedIn: true,
-      currentPage: 'WELCOME',
       _id: _id,
       sample: sample[0],
       chords: chords[0],
@@ -79,7 +76,6 @@ class App extends Component {
   setGuest() {
     this.setState({
       guest: true,
-      currentPage: 'WELCOME'
     })
   }
 
@@ -92,17 +88,10 @@ class App extends Component {
     })
   }
 
-  setPage(page) {
-    this.setState({
-      currentPage: page
-    })
-  }
-
   setResults(results) {
     this.setState({
-      searchResults: results,
-      currentPage: 'RESULTS'
-    })
+      searchResults: results
+    });
   }
 
   setBuffer(url) {
@@ -118,7 +107,7 @@ class App extends Component {
         url: url,
         name: name
       }
-    })
+    });
     this.setBuffer(url);
   }
 
@@ -147,7 +136,7 @@ class App extends Component {
             ...this.state.chords,
             oscillator: {type: wave}
           }
-        })
+        });
         break;
       default:
         break;
@@ -175,7 +164,7 @@ class App extends Component {
             ...melody,
             detune: melody.detune + val
           }
-        })
+        });
         break;
       case 'chords':
         this.setState({
@@ -183,7 +172,7 @@ class App extends Component {
             ...chords,
             detune: chords.detune + val
           }
-        })
+        });
         break;
       case 'all':
         this.setState({
@@ -199,7 +188,7 @@ class App extends Component {
             ...sample,
             detune: sample.detune + val
           }
-        })
+        });
         break;
       default:
         break;
@@ -226,18 +215,19 @@ class App extends Component {
   }
 
   render() {
-    const { sample, chords, melody, currentPage, searchResults, loggedIn, guest } = this.state;
+    const { sample, chords, melody, searchResults, loggedIn, guest } = this.state;
 
-    // same props for every <Page> component
-    const pageProps = {
+    const sharedProps = {
       startClickHandler: this.startClickHandler,
       stopClickHandler: this.stopClickHandler,
       handleSave: this.handleSave,
-      guest: guest
-    }
+      detuneHandler: this.detuneHandler,
+      changeWave: this.changeWave,
+      guest
+    };
 
     //initialize instruments to settings from state
-    //need to refactor sample model to allow `SampleInstrument.set(sample)`
+    //todo: refactor sample model to allow `SampleInstrument.set(sample)`
     melodySynth.set(melody);
     chordSynth.set(chords);
     sampleInstrument.set({
@@ -245,64 +235,47 @@ class App extends Component {
     });
     this.setBuffer(sample.url);
 
-    let partial;
-    switch(currentPage) {
-      case 'SAMPLE':
-        partial = <Page header='S A M P L E' color='#CBB274' pattern={sampleInstrument} {...pageProps}>
-
-          <Search setResults={this.setResults}/>
-          <SampleName name={sample.name} />
-          <Reverse setReverse={this.setReverse}/>
-          <CustomSlider value={sample.detune} setSliderVal={this.setSliderVal} >
-            Speed:
-          </CustomSlider>
-
-        </Page>
-        break;
-      case 'MELODY':
-        partial = <Page header='M E L O D Y' color='#C16F7A' pattern={melodyPattern} {...pageProps}>
-
-          <Transpose detuneHandler={this.detuneHandler} synth='melody' plus={1200} minus={-1200}>
-            Octave:
-          </Transpose>
-          <Waveform changeWave={this.changeWave} synth='melody' />
-
-        </Page>
-        break;
-      case 'CHORDS':
-        partial = <Page header='C H O R D S' color='#575F8B' pattern={chordPattern} {...pageProps}>
-
-          <Transpose detuneHandler={this.detuneHandler} synth='chords' plus={1200} minus={-1200}>
-            Octave:
-          </Transpose>
-          <Waveform changeWave={this.changeWave} synth='chords' />
-
-        </Page>
-        break;
-      case 'GLOBAL':
-        partial = <Page header='G L O B A L' color='#7DB064' pattern={[melodyPattern, chordPattern, sampleInstrument]}
-          mode='all' {...pageProps}>
-
-          <Transpose detuneHandler={this.detuneHandler} synth='all' plus={100} minus={-100}>
-            Transpose:
-          </Transpose>
-
-        </Page>
-        break;
-      case 'RESULTS':
-        partial = <Results results={searchResults} setUrl={this.setUrl} />
-        break;
-      default:
-        partial = <Welcome />
-        break;
-    }
-
     if (loggedIn || guest) {
       return (
-        <div className='App'>
-          <Nav handleClick={this.setPage}/>
-          {partial}
-        </div>
+        <Router>
+          <div className='App'>
+            <Nav />
+            <Route render={({ location }) =>
+              <TransitionGroup>
+                <CSSTransition
+                  classNames="fade"
+                  timeout={300}
+                  key={location.key}
+                >
+                  <Switch location={location}>
+                    <Route exact path="/" component={Welcome} />
+                    <Route exact path="/chords" children={() =>
+                      <Chords {...sharedProps} />}
+                    />
+                    <Route exact path="/melody" children={() =>
+                      <Melody {...sharedProps} />}
+                    />
+                    <Route exact path="/sample" children={() =>
+                      <Sample
+                        setResults={this.setResults}
+                        setReverse={this.setReverse}
+                        setSliderVal={this.setSliderVal}
+                        sample={sample}
+                        {...sharedProps}
+                      />}
+                    />
+                    <Route exact path="/global" children={() =>
+                      <Global {...sharedProps} />}
+                    />
+                    <Route exact path="/sample/search" children={() =>
+                      <Results results={searchResults} setUrl={this.setUrl} />}
+                    />
+                  </Switch>
+                </CSSTransition>
+              </TransitionGroup>
+            } />
+          </div>
+        </Router>
       );
     } else {
       return (
