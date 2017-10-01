@@ -22,6 +22,6 @@ const Welcome = () => {
       the latest versions of Google Chrome or Mozilla Firefox.</p>
     </div>
     )
-}
+};
 
 export default Welcome;

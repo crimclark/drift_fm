@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import Loading from './Loading';
 import './login.css'
+
 const server = process.env.REACT_APP_SERVER;
 
 class Login extends Component {
@@ -48,7 +49,6 @@ class Login extends Component {
         }).then( song => song.json() )
           .then( song => {
             this.props.setLoggedIn(song);
-            console.log(song);
           })
     }
   }

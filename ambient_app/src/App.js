@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Tone from 'tone';
 import './App.css';
@@ -55,6 +55,8 @@ class App extends Component {
     this.setLoggedIn = this.setLoggedIn.bind(this);
     this.setGuest = this.setGuest.bind(this);
     this.setReverse = this.setReverse.bind(this);
+
+    this.root = '/drift_fm';
   }
 
   componentDidMount() {
@@ -70,7 +72,7 @@ class App extends Component {
       sample: sample[0],
       chords: chords[0],
       melody: melody[0]
-    })
+    });
   }
 
   setGuest() {
@@ -235,53 +237,53 @@ class App extends Component {
     });
     this.setBuffer(sample.url);
 
-    if (loggedIn || guest) {
-      return (
-        <Router>
-          <div className='App'>
-            <Nav />
-            <Route render={({ location }) =>
-              <TransitionGroup>
-                <CSSTransition
-                  classNames="fade"
-                  timeout={300}
-                  key={location.key}
-                >
-                  <Switch location={location}>
-                    <Route exact path="/" component={Welcome} />
-                    <Route exact path="/chords" children={() =>
-                      <Chords {...sharedProps} />}
-                    />
-                    <Route exact path="/melody" children={() =>
-                      <Melody {...sharedProps} />}
-                    />
-                    <Route exact path="/sample" children={() =>
-                      <Sample
-                        setResults={this.setResults}
-                        setReverse={this.setReverse}
-                        setSliderVal={this.setSliderVal}
-                        sample={sample}
-                        {...sharedProps}
-                      />}
-                    />
-                    <Route exact path="/global" children={() =>
-                      <Global {...sharedProps} />}
-                    />
-                    <Route exact path="/sample/search" children={() =>
-                      <Results results={searchResults} setUrl={this.setUrl} />}
-                    />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
-            } />
-          </div>
-        </Router>
-      );
-    } else {
-      return (
-        <Login setLoggedIn={this.setLoggedIn} setGuest={this.setGuest} />
-      )
-    }
+    return (
+      <Router>
+        <div className='App'>
+          <Nav showNav={loggedIn || guest}/>
+          <Route render={({ location }) =>
+            <TransitionGroup>
+              <CSSTransition
+                classNames="fade"
+                timeout={300}
+                key={location.key}
+              >
+                <Switch location={location}>
+                  <Route exact path={`${this.root}`} children={() => (
+                    loggedIn || guest ? (
+                      <Welcome />
+                    ) : (
+                      <Login setLoggedIn={this.setLoggedIn} setGuest={this.setGuest} />
+                    )
+                  )}/>
+                  <Route exact path={`${this.root}/chords`} children={() =>
+                    <Chords {...sharedProps} />}
+                  />
+                  <Route exact path={`${this.root}/melody`} children={() =>
+                    <Melody {...sharedProps} />}
+                  />
+                  <Route exact path={`${this.root}/sample`} children={() =>
+                    <Sample
+                      setResults={this.setResults}
+                      setReverse={this.setReverse}
+                      setSliderVal={this.setSliderVal}
+                      sample={sample}
+                      {...sharedProps}
+                    />}
+                  />
+                  <Route exact path={`${this.root}/global`} children={() =>
+                    <Global {...sharedProps} />}
+                  />
+                  <Route exact path={`${this.root}/sample/search`} children={() =>
+                    <Results results={searchResults} setUrl={this.setUrl} />}
+                  />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          } />
+        </div>
+      </Router>
+    );
   }
 }
 

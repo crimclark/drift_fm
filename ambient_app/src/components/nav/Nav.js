@@ -2,7 +2,9 @@ import React from 'react';
 import NavLink from './NavLink';
 import './nav.css';
 
-const Nav = () => {
+const Nav = ({ showNav }) => {
+  if (!showNav) return false;
+
   return (
     <div className="pure-menu pure-menu-horizontal">
       <ul className="pure-menu-list">

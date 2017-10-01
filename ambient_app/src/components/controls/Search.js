@@ -30,7 +30,7 @@ class Search extends Component {
     const url = `https://www.freesound.org/apiv2/search/text/?query=${query}&fields=name,previews&token=${token}`;
     fetch(url).then( res => res.json() ).then( res => {
       setResults(res.results);
-      history.push('/sample/search', { searchResults: res.results });
+      history.push('/drift_fm/sample/search');
     })
   }
 

@@ -9,8 +9,6 @@ ul {
 
 .App {
   color: white;
-  font-family: 'PT Sans', sans-serif;
-  font-size: 1.2em;
 }
 
 .save-button {
@@ -33,6 +31,11 @@ ul {
 
 .pure-menu-selected {
   color: #44507F;
+}
+
+.instrument, .welcome-container {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.2em;
 }
 
 .instrument {
@@ -68,19 +71,15 @@ ul {
 }
 
 @media (max-width: 510px) {
-
   .instrument {
     width: 350px;
   }
-
 }
 
 @media (max-width: 320px) {
-
   .instrument {
     width: 300px;
   }
-
 }
 
 #wave-button {

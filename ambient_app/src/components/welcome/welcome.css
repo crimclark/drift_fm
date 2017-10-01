@@ -39,6 +39,7 @@
 }
 
 #disclaimer {
+  text-align: center;
   margin: 75px;
   font-size: .8em;
   background: -webkit-linear-gradient(white, #c6c6c6);
