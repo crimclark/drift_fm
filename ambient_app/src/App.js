@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Tone from 'tone';
 import './App.css';
@@ -249,7 +249,7 @@ class App extends Component {
                 key={location.key}
               >
                 <Switch location={location}>
-                  <Route exact path={`${this.root}`} children={() => (
+                  <Route exact path={"/"} children={() => (
                     loggedIn || guest ? (
                       <Welcome />
                     ) : (
