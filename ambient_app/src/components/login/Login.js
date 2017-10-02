@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import Loading from './Loading';
 import './login.css'
-
 const server = process.env.REACT_APP_SERVER;
+import { inject, observer } from 'mobx-react';
 
+@inject('userStore')
+@observer
 class Login extends Component {
 
   constructor() {
@@ -12,14 +14,17 @@ class Login extends Component {
     this.state = {
       loading: false,
       active: 'inactive'
-    }
+    };
     this.responseGoogle = this.responseGoogle.bind(this);
-    this.handleGuestClick = this.handleGuestClick.bind(this);
   }
 
   // wake up heroku
   componentDidMount() {
     fetch(`${server}/songs`);
+  }
+
+  setLoggedIn(song) {
+    this.props.userStore.setLoggedIn(song);
   }
 
   responseGoogle(response) {
@@ -48,13 +53,13 @@ class Login extends Component {
           })
         }).then( song => song.json() )
           .then( song => {
-            this.props.setLoggedIn(song);
+            this.setLoggedIn(song);
           })
     }
   }
 
   handleGuestClick() {
-    this.props.setGuest();
+    this.props.userStore.setGuest();
   }
 
   render() {
@@ -81,7 +86,13 @@ class Login extends Component {
             <label htmlFor="login">Login with Google</label>
           </div>
           <div className={this.state.active} id="guestlogin">
-            <button className="pure-button" id="guest-btn" onClick={this.handleGuestClick}>Guest</button>
+            <button
+              className="pure-button"
+              id="guest-btn"
+              onClick={() => this.handleGuestClick()}
+            >
+              Guest
+            </button>
             <div id="guestlabel">
               <label htmlFor="guest">Login as Guest
               <span id="disable-message">(Saving Disabled)</span></label>

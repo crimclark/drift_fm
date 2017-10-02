@@ -1,8 +1,9 @@
 import React from 'react';
-import WaveButton from '../buttons/WaveButton';
-import sinewave from '../../sinewave.png';
-import sawtooth from '../../sawtooth.png';
-import squarewave from '../../squarewave.png';
+import WaveButton from 'src/components/buttons/WaveButton';
+
+const sinewave = '../../../assets/sinewave.png';
+const sawtooth = '../../../assets/sawtooth.png';
+const squarewave = '../../../assets/squarewave.png';
 
 const Waveform = ({changeWave, synth}) => {
   return (
@@ -14,7 +15,7 @@ const Waveform = ({changeWave, synth}) => {
         <WaveButton wave='sawtooth' synth={synth} changeWave={changeWave} img={sawtooth} alt='saw' />
       </span>
     </div>
-    )
-}
+  )
+};
 
 export default Waveform;

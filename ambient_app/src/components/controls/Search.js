@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
+import { inject, observer } from 'mobx-react';
 
+@inject('songStore')
+@observer
 class Search extends Component {
   constructor() {
     super();
@@ -24,20 +27,25 @@ class Search extends Component {
     this.searchFreesound(query);
   }
 
+  setSearchResults(results) {
+    this.props.songStore.setSearchResults(results);
+  }
+
   searchFreesound(query){
-    const { history, setResults } = this.props;
     const token = process.env.REACT_APP_FREESOUND_TOKEN;
     const url = `https://www.freesound.org/apiv2/search/text/?query=${query}&fields=name,previews&token=${token}`;
-    fetch(url).then( res => res.json() ).then( res => {
-      setResults(res.results);
-      history.push('/drift_fm/sample/search');
+    fetch(url)
+      .then( res => res.json() )
+      .then( res => {
+        this.setSearchResults(res.results);
+        this.props.history.push('/drift_fm/sample/search');
     })
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={e => this.handleSubmit(e)}>
           <input type="text" onChange={this.handleChange} placeholder="Search Freesound.org" />
           <button className="pure-button">Search</button>
         </form>

@@ -1,32 +1,24 @@
 import Slider from 'rc-slider';
 import React, { Component } from 'react';
 import 'rc-slider/assets/index.css';
-import sampleInstrument from '../sample/SampleInstrument';
 import './customSlider.css';
+import { inject, observer } from 'mobx-react';
 
+@inject('songStore')
+@observer
 class CustomSlider extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: this.props.value
-    }
-    this.onSliderChange = this.onSliderChange.bind(this);
-  }
-
   onSliderChange(value) {
-    this.setState({
-      value: value
-    })
-    sampleInstrument.set({detune: value });
-    this.props.setSliderVal(value);
+    this.props.songStore.setSliderVal(value);
   }
 
   render() {
+    const { songStore: { sample }, children } = this.props;
+
     return (
       <div className="custom-slider">
-        {this.props.children}
-        <Slider value={this.state.value} min={-2400} max={2400}
-        onChange={this.onSliderChange} marks={{0: ''}} />
+        {children}
+        <Slider value={sample.detune} min={-2400} max={2400}
+        onChange={(val) => this.onSliderChange(val)} marks={{0: ''}} />
       </div>
     );
   }

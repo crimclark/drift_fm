@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
+import { inject } from 'mobx-react';
 
+@inject('songStore')
 class SaveButton extends Component {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.props.handleSave();
-  }
-
   render() {
     return (
       <div className="save-button">
-        <button className="pure-button" onClick={this.handleClick}>SAVE</button>
+        <button
+          className="pure-button"
+          onClick={() => this.props.songStore.saveSong()}
+        >
+          SAVE
+        </button>
       </div>
     )
   }

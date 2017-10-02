@@ -8,23 +8,24 @@ function randomIndex(array) {
 }
 
 function randomChord(randomIndex) {
-  var i = randomIndex(chordList);
+  const i = randomIndex(chordList);
   return chordList[i];
 }
 
-var chordSynth = new Tone.PolySynth(8, Tone.Synth).chain(delay);
+const chordSynth = new Tone.PolySynth(8, Tone.Synth).chain(delay);
+
 chordSynth.set({
-    envelope : {
-        attack : 2,
-        release : 10
-    },
-    volume : -20
+  envelope: {
+    attack: 2,
+    release: 10
+  },
+  volume: -20
 });
 
-var chordPattern = new Tone.Event(function(rate){
+const chordPattern = new Tone.Event(function(rate){
   chordSynth.triggerAttackRelease(randomChord(randomIndex), '4n');
   chordPattern.playbackRate = randomVal(rates);
-})
+});
 
 chordPattern.loop = true;
 

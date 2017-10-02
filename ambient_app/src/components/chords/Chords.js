@@ -7,28 +7,24 @@ import { chordPattern } from './chordInstrument';
 class Chords extends Component {
 
 	render() {
-	  const { handleSave, detuneHandler, startClickHandler, stopClickHandler, guest, changeWave } = this.props;
+	  const { handleSave, guest } = this.props;
 
 		return (
 			<InstrumentContainer
         header='C H O R D S'
         color='#575F8B'
         pattern={chordPattern}
-        startClickHandler={startClickHandler}
-        stopClickHandler={stopClickHandler}
         handleSave={handleSave}
         guest={guest}
       >
-          <Transpose
-            detuneHandler={detuneHandler}
-            synth='chords'
-            plus={1200}
-            minus={-1200}
-          >
-            Octave:
-          </Transpose>
-          <Waveform changeWave={changeWave} synth='chords' />
-
+        <Transpose
+          synth='chords'
+          plus={1200}
+          minus={-1200}
+        >
+          Octave:
+        </Transpose>
+        <Waveform synth='chords'/>
       </InstrumentContainer>
 		)
 	}
