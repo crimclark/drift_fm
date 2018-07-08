@@ -6,25 +6,26 @@ import CustomSlider from '../buttons/CustomSlider';
 import SampleName from '../sample/SampleName';
 import sampleInstrument from './SampleInstrument';
 
+import { inject, observer } from 'mobx-react';
+
+@inject('songStore')
+@observer
 class Sample extends Component {
 
   render() {
-    const { setResults, setReverse, sample, setSliderVal, handleSave, startClickHandler, stopClickHandler, guest } = this.props;
+    const { handleSave, songStore: { sample } } = this.props;
 
     return (
       <InstrumentContainer
         header='S A M P L E'
         color='#CBB274'
         pattern={sampleInstrument}
-        startClickHandler={startClickHandler}
-        stopClickHandler={stopClickHandler}
         handleSave={handleSave}
-        guest={guest}
       >
-        <Search setResults={setResults}/>
+        <Search/>
         <SampleName name={sample.name} />
-        <Reverse setReverse={setReverse}/>
-        <CustomSlider value={sample.detune} setSliderVal={setSliderVal} >
+        <Reverse />
+        <CustomSlider>
           Speed:
         </CustomSlider>
       </InstrumentContainer>

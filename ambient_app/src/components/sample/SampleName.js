@@ -8,6 +8,6 @@ const SampleName = ({name}) => {
       {loadMsg}
     </div>
   )
-}
+};
 
 export default SampleName;

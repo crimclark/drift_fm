@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
+import { inject } from 'mobx-react';
 
+@inject('songStore')
 class DetuneButton extends Component {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    const {synth, val, detuneHandler} = this.props;
-    detuneHandler(val, synth);
-  }
-
   render() {
+    const { songStore, val, synth, children } = this.props;
+
     return (
-      <button onClick={this.handleClick} className="pure-button">{this.props.children}</button>
+      <button
+        onClick={() => songStore.detune(val, synth)}
+        className="pure-button"
+      >
+        {children}
+      </button>
     )
   }
 }
